@@ -1,0 +1,3605 @@
+<!DOCTYPE html>
+<!-- saved from url=(0106)https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12 -->
+<html prefix="og: http://ogp.me/ns#" dir="ltr" lang="en" class="js no-flash filereader no-exiforientation"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.uib-tab > div{position:relative;display:block;padding:10px 15px;outline:0;color:#337ab7;}.uib-tab > div:focus,.uib-tab > div:hover{background-color:#eee;color:#23527c;}.uib-tab.disabled > div{color:#777;}.uib-tab.disabled > div:focus,.uib-tab.disabled > div:hover{color:#777;cursor:not-allowed;background-color:transparent;}.nav-tabs > .uib-tab > div{margin-right:2px;line-height:1.42857143;border:1px solid transparent;border-radius:4px 4px 0 0;}.nav-tabs > .uib-tab > div:hover{border-color:#eee #eee #ddd;}.nav-tabs > .uib-tab.active > div,.nav-tabs > .uib-tab.active > div:focus,.nav-tabs > .uib-tab.active > div:hover{color:#555;cursor:default;background-color:#fff;border-color:#ddd #ddd transparent #ddd;}.nav-pills > .uib-tab > div{border-radius:4px;}.nav-pills > .uib-tab.active > div,.nav-pills > .uib-tab.active > div:focus,.nav-pills > .uib-tab.active > div:hover{color:#fff;background-color:#337ab7;}</style><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+	
+	<title> Configuring A Firewall For Box Applications - Box</title>
+	
+	<script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/jquery.min.js.ダウンロード"></script>
+
+<script src="./Configuring A Firewall For Box Applications - Box_files/satelliteLib-484437253274a19f1ee1e5ac977ea5495b2855a9.js.ダウンロード"></script>
+
+
+
+	
+	
+	
+	<meta content="When configuring your firewall to allow Box as a trusted source, please use the steps outlined below: 1. Use our site&#39;s domain names instead of a particular site IP address as IP addresses can change frequently and without notice. Please configure host names to recognize any sub-domain of:  *.box.com *.app.box.com *.boxcloud.com *.boxlocalhost.com *.box.net *.boxcdn.net If you are unable to use wildcards as shown in the list above, please allow these specific hostnames: www.box.com, www.box.net, app.box.com, account.box.com[1], ent.box.com[1], community.box.com, yourcustomsubdomain.app.box.com, yourcustomsubdomain.ent.box.com, upload.app.box.com[2], upload.box.com, upload.box.net, fupload1.box.com, fupload1.app.box.com, dl.boxcloud.com, dl2.boxcloud.com, edit.boxlocalhost.com, a.app.box.com, m.app.box.com, ak1.boxcdn.net, ak2.boxcdn.net, ak3.boxcdn.net, e1.boxcdn.net, e2.boxcdn.net, e3.boxcdn.net, s5.boxcdn.net, 1.realtime.services.box.net, 2.realtime.services.box.net, cdn01.boxcdn.net through cdn20.boxcdn.net[3], notes.services.box.com[4]   [1] accounts.box.com and ent.box.com added Nov 2015 [2] upload.app.box.com is a new addition to the list above. [3] new hostnames cdn01 – 20.boxcdn.net added May 31, 2014 [4] notes.services.box.com added June 2014   2. Enable HTTPS (port 443) for the domains above. Due to the numerous firewalls available we cannot provide specific instructions for each firewall beyond what is listed above. If you are using a firewall or proxy such as Websense, Blue Coat, etc., please create a Box User Services case  and request any additional domains or custom subdomains that may be required with Enterprise accounts.   Configuring a Proxy for Box Sync 1. What client settings are supported?  Automatic Proxy Detection  Automatic Proxy Configuration (PAC file) Manual setting: Select Web Proxy (HTTP) and Secure Web Proxy (HTTPS) and enter the IP address or host name for your proxy server 2. What server settings are supported?  Proxy server without authentication Proxy server with NTLM AD authentication 3. What are the proxy exceptions?   Windows:   Box Sync for Windows does not work with NTLM V2 . The Windows API does not support local file path schema (file://C:\proxy.pac).  Box Sync works if the PAC file path starts with HTTP or HTTPS, but if it doesn&#39;t work if the pac file path is the local path.  Configuring a Proxy for Box Edit More specific information about Box Edit DNS and proxy configurations can be found here." name="description"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"><meta content="2019-10-15T08:25:10-07:00" itemprop="dateModified"><link href="https://community.box.com/t5/Account-Information/Configuring-A-Firewall-For-Box-Applications/ta-p/12" rel="canonical">
+	<meta content="https://community.box.com/t5/user/viewprofilepage/user-id/6" property="article:author"><meta content="Box Community" property="og:site_name"><meta content="article" property="og:type"><meta content="https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12" property="og:url"><meta content="Proxy" property="article:tag"><meta content="Whitelisting" property="article:tag"><meta content="Box Servers" property="article:tag"><meta content="Firewall" property="article:tag"><meta content="How to Guides for Account Information" property="article:section"><meta content="When configuring your firewall to allow Box as a trusted source, please use the steps outlined below: 1. Use our site&#39;s domain names instead of a particular site IP address, as IP addresses can change frequently and without notice. Please configure hostnames to recognize any subdomain of:  *.box.com..." property="og:description"><meta content="2015-02-12T02:40:00.000Z" property="article:published_time"><meta content="2019-10-15T08:25:10-07:00" property="article:modified_time"><meta content="Configuring A Firewall For Box Applications" property="og:title">
+	
+	
+		<link class="lia-link-navigation hidden live-links" title="article Configuring A Firewall For Box Applications in How to Guides for Account Information" type="application/rss+xml" rel="alternate" id="link" href="https://community.box.com/pjrjx47372/rss/message?board.id=howtoguidesaccountinfo&amp;message.id=36">
+	
+
+	
+	
+	    
+            	<link href="./Configuring A Firewall For Box Applications - Box_files/responsiveboxskin.css" rel="stylesheet" type="text/css">
+            
+	
+
+	
+	
+	
+	
+	<link href="./Configuring A Firewall For Box Applications - Box_files/css" rel="stylesheet">
+<link href="https://community.box.com/html/assets/favicon.ico" rel="shortcut icon">
+
+
+<script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/lia-scripts-head-min.js.ダウンロード"></script><script language="javascript" type="text/javascript">
+<!--
+
+window.FileAPI={jsPath:'/html/assets/js/vendor/ng-file-upload-shim/'};LITHIUM.PrefetchData={"Components":{},"commonResults":{}};LITHIUM.DEBUG=false;LITHIUM.CommunityJsonObject={"Validation":{"image.description":{"min":0,"max":1000,"isoneof":[],"type":"string"},"tkb.toc_maximum_heading_level":{"min":1,"max":6,"isoneof":[],"type":"integer"},"tkb.toc_heading_list_style":{"min":0,"max":50,"isoneof":["disc","circle","square","none"],"type":"string"},"tkb.toc_heading_indent":{"min":5,"max":50,"isoneof":[],"type":"integer"}},"User":{"settings":{"imageupload.legal_file_extensions":"*.jpg;*.JPG;*.jpeg;*.JPEG;*.png;*.PNG","config.enable_avatar":true,"integratedprofile.show_klout_score":true,"layout.sort_view_by_last_post_date":false,"layout.friendly_dates_enabled":true,"profileplus.allow.anonymous.scorebox":false,"tkb.message_sort_default":"topicPublishDate","layout.format_pattern_date":"MM-dd-yyyy","config.require_search_before_post":"off","isUserLinked":false,"integratedprofile.cta_add_topics_dismissal_timestamp":-1,"layout.message_body_image_max_size":1000,"profileplus.everyone":false,"integratedprofile.cta_connect_wide_dismissal_timestamp":-1,"integratedprofile.hide_social_networks":false,"contest.entries_per_page_num":20,"layout.messages_per_page_linear":50,"integratedprofile.cta_manage_topics_dismissal_timestamp":-1,"profile.shared_profile_test_group":false,"integratedprofile.cta_personalized_feed_dismissal_timestamp":-1,"integratedprofile.curated_feed_size":10,"contest.one_kudo_per_contest":false,"integratedprofile.enable_social_networks":false,"integratedprofile.my_interests_dismissal_timestamp":-1,"profile.language":"en","layout.friendly_dates_max_age_days":31,"layout.threading_order":"thread_descending","useRecService":false,"layout.module_welcome":"","imageupload.max_uploaded_images_per_upload":100,"imageupload.max_uploaded_images_per_user":1000,"integratedprofile.connect_mode":"","tkb.toc_maximum_heading_level":"2","tkb.toc_heading_list_style":"disc","sharedprofile.show_hovercard_score":true,"config.search_before_post_scope":"community","tkb.toc_heading_indent":"15","p13n.cta.recommendations_feed_dismissal_timestamp":-1,"imageupload.max_file_size":3072,"layout.show_batch_checkboxes":false,"integratedprofile.cta_connect_slim_dismissal_timestamp":-1},"isAnonymous":true,"policies":{"image-upload.process-and-remove-exif-metadata":false},"registered":false,"emailRef":"","id":-1,"login":"Anonymous"},"Server":{"communityPrefix":"/pjrjx47372","nodeChangeTimeStamp":1575332125459,"tapestryPrefix":"/t5","deviceMode":"DESKTOP","responsiveDeviceMode":"DESKTOP","version":"19.8","branch":"19.8-release","showTextKeys":false},"Config":{"phase":"prod","integratedprofile.cta.reprompt.delay":30,"profileplus.tracking":{"profileplus.tracking.enable":false,"profileplus.tracking.click.enable":false,"profileplus.tracking.impression.enable":false},"app.revision":"1910300159-sd7a0be4c43-b46"},"Activity":{"Results":[]},"NodeContainer":{"viewHref":"https://community.box.com/t5/Account-Info-and-Billing/ct-p/AccountBilling","description":"Maintain your settings and configuration","id":"AccountBilling","shortTitle":"Account Info and Billing","title":"Account Info and Billing","nodeType":"category"},"Page":{"skins":["responsiveboxskin","responsive_peak"],"authUrls":{"loginUrl":"/plugins/common/feature/oauth2sso/sso_login_redirect?referer=https%3A%2F%2Fcommunity.box.com%2Ft5%2FHow-to-Guides-for-Account%2FConfiguring-A-Firewall-For-Box-Applications%2Fta-p%2F12","loginUrlNotRegistered":"/plugins/common/feature/oauth2sso/sso_login_redirect?redirectreason=notregistered&referer=https%3A%2F%2Fcommunity.box.com%2Ft5%2FHow-to-Guides-for-Account%2FConfiguring-A-Firewall-For-Box-Applications%2Fta-p%2F12","loginUrlNotRegisteredDestTpl":"/plugins/common/feature/oauth2sso/sso_login_redirect?redirectreason=notregistered&referer=%7B%7BdestUrl%7D%7D"},"name":"TkbArticlePage","rtl":false,"object":{"viewHref":"/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12","subject":"Configuring A Firewall For Box Applications","id":12,"page":"TkbArticlePage","type":"Thread"}},"WebTracking":{"Activities":{},"path":"Community:Box/Category:Community/Category:Account Info and Billing/Board:How to Guides for Account Information/Message:Configuring A Firewall For Box Applications"},"Feedback":{"targeted":{}},"Seo":{"markerEscaping":{"pathElement":{"prefix":"@","match":"^[0-9][0-9]$"},"enabled":false}},"TopLevelNode":{"viewHref":"https://community.box.com/t5/Box-Community/ct-p/English","description":"Search our knowledge base, ask in our forums, or see support options","id":"English","shortTitle":"Community","title":"Box Community","nodeType":"category"},"Community":{"viewHref":"https://community.box.com/","integratedprofile.lang_code":"en","integratedprofile.country_code":"US","id":"pjrjx47372","shortTitle":"Box","title":"Box"},"CoreNode":{"conversationStyle":"tkb","viewHref":"https://community.box.com/t5/How-to-Guides-for-Account/tkb-p/howtoguidesaccountinfo","settings":{},"description":"","id":"howtoguidesaccountinfo","shortTitle":"How to Guides for Account Information","title":"How to Guides for Account Information","nodeType":"Board","ancestors":[{"viewHref":"https://community.box.com/t5/Account-Info-and-Billing/ct-p/AccountBilling","description":"Maintain your settings and configuration","id":"AccountBilling","shortTitle":"Account Info and Billing","title":"Account Info and Billing","nodeType":"category"},{"viewHref":"https://community.box.com/t5/Box-Community/ct-p/English","description":"Search our knowledge base, ask in our forums, or see support options","id":"English","shortTitle":"Community","title":"Box Community","nodeType":"category"},{"viewHref":"https://community.box.com/","description":"Search our knowledge base, ask in our forums, or find support options here","id":"pjrjx47372","shortTitle":"Box","title":"Box","nodeType":"Community"}]}};LITHIUM.Components.RENDER_URL='/t5/util/componentrenderpage/component-id/#{component-id}?render_behavior=raw';LITHIUM.Css={"BASE_DEFERRED_IMAGE":"lia-deferred-image","BASE_BUTTON":"lia-button","BASE_SPOILER_CONTAINER":"lia-spoiler-container","BASE_TABS_INACTIVE":"lia-tabs-inactive","BASE_TABS_ACTIVE":"lia-tabs-active","BASE_AJAX_REMOVE_HIGHLIGHT":"lia-ajax-remove-highlight","BASE_FEEDBACK_SCROLL_TO":"lia-feedback-scroll-to","BASE_FORM_FIELD_VALIDATING":"lia-form-field-validating","BASE_FORM_ERROR_TEXT":"lia-form-error-text","BASE_FEEDBACK_INLINE_ALERT":"lia-panel-feedback-inline-alert","BASE_BUTTON_OVERLAY":"lia-button-overlay","BASE_TABS_STANDARD":"lia-tabs-standard","BASE_AJAX_INDETERMINATE_LOADER_BAR":"lia-ajax-indeterminate-loader-bar","BASE_AJAX_SUCCESS_HIGHLIGHT":"lia-ajax-success-highlight","BASE_CONTENT":"lia-content","BASE_JS_HIDDEN":"lia-js-hidden","BASE_AJAX_LOADER_CONTENT_OVERLAY":"lia-ajax-loader-content-overlay","BASE_FORM_FIELD_SUCCESS":"lia-form-field-success","BASE_FORM_WARNING_TEXT":"lia-form-warning-text","BASE_FORM_FIELDSET_CONTENT_WRAPPER":"lia-form-fieldset-content-wrapper","BASE_AJAX_LOADER_OVERLAY_TYPE":"lia-ajax-overlay-loader","BASE_FORM_FIELD_ERROR":"lia-form-field-error","BASE_SPOILER_CONTENT":"lia-spoiler-content","BASE_FORM_SUBMITTING":"lia-form-submitting","BASE_EFFECT_HIGHLIGHT_START":"lia-effect-highlight-start","BASE_FORM_FIELD_ERROR_NO_FOCUS":"lia-form-field-error-no-focus","BASE_EFFECT_HIGHLIGHT_END":"lia-effect-highlight-end","BASE_SPOILER_LINK":"lia-spoiler-link","BASE_DISABLED":"lia-link-disabled","FACEBOOK_LOGOUT":"lia-component-users-action-logout","FACEBOOK_SWITCH_USER":"lia-component-admin-action-switch-user","BASE_FORM_FIELD_WARNING":"lia-form-field-warning","BASE_AJAX_LOADER_FEEDBACK":"lia-ajax-loader-feedback","BASE_AJAX_LOADER_OVERLAY":"lia-ajax-loader-overlay","BASE_LAZY_LOAD":"lia-lazy-load"};LITHIUM.noConflict=true;LITHIUM.useCheckOnline=false;LITHIUM.RenderedScripts=["Globals.js","jquery.js","jquery.effects.core.js","jquery.scrollTo.js","DataHandler.js","json2.js","jquery.lithium-selector-extensions.js","ElementMethods.js","DropDownMenu.js","Components.js","jquery.css-data-1.0.js","Lithium.js","Tooltip.js","ResizeSensor.js","InformationBox.js","jquery.iframe-shim-1.0.js","SearchForm.js","DropDownMenuVisibilityHandler.js","SpoilerToggle.js","jquery.ui.core.js","jquery.clone-position-1.0.js","jquery.iframe-transport.js","PartialRenderProxy.js","jquery.json-1.3.js","jquery.appear-1.1.1.js","UserNavigation2.js","Placeholder.js","MessageBodyDisplay.js","jquery.tmpl-1.1.1.js","jquery.fileupload.js","Video.js","Auth.js","Throttle.js","jquery.ui.draggable.js","jquery.ui.dialog.js","jquery.ui.resizable.js","jquery.ui.widget.js","NoConflict.js","jquery.effects.slide.js","jquery.position-toggle-1.0.js","jquery.hoverIntent-r6.js","jquery.function-utils-1.0.js","PolyfillsAll.js","jquery.placeholder-2.0.7.js","jquery.blockui.js","jquery.viewport-1.0.js","Cache.js","jquery.ui.mouse.js","EarlyEventCapture.js","DeferredImages.js","Forms.js","prism.js","ElementQueries.js","SearchAutoCompleteToggle.js","AjaxFeedback.js","ActiveCast3.js","ForceLithiumJQuery.js","jquery.ajax-cache-response-1.0.js","Loader.js","jquery.delayToggle-1.0.js","jquery.ui.position.js","CustomEvent.js","AutoComplete.js","jquery.tools.tooltip-1.2.6.js","LiModernizr.js","Events.js","Sandbox.js","AjaxSupport.js","jquery.autocomplete.js","Text.js","Namespace.js"];// -->
+</script><script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/lia-scripts-head-min.js(1).ダウンロード"></script><script src="./Configuring A Firewall For Box Applications - Box_files/s-code-contents-f0ecde53ed60e028c463b7941253b48e18701d8c.js.ダウンロード"></script><!--<base href="https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12">--><base href="."><style type="text/css">[responsive-image] > img, [data-responsive-image] {overflow: hidden; padding: 0; } [responsive-image] > img, [data-responsive-image] > img {width: 100%;}
+@keyframes element-queries { 0% { visibility: inherit; } }</style></head>
+	<body class="lia-tkb lia-user-status-anonymous TkbArticlePage lia-body" id="lia-body">
+	
+	
+	<div id="697AE508" class="ServiceNodeInfoHeader">
+</div>
+	
+	
+	
+	
+
+	<div class="lia-page">
+		<center>
+			
+				
+					
+	
+	<div class="MinimumWidthContainer">
+		<div class="min-width-wrapper">
+			<div class="min-width">		
+				
+						<div class="lia-content" ng-csp="no-unsafe-eval" li-common-non-bindable="">
+                            
+							
+							
+							
+		
+	<div class="lia-quilt lia-quilt-tkb-article-page lia-quilt-layout-two-column-main-side lia-top-quilt lia-quilt-tkb-article-page-v2_4">
+	<div class="lia-quilt-row lia-quilt-row-header">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-common-header">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-single">
+	
+		
+			<div class="lia-quilt lia-quilt-header lia-quilt-layout-header lia-component-quilt-header">
+	<div class="lia-quilt-row lia-quilt-row-row_1">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-main-header-content">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-single">
+	
+		
+			<!-- GZ-custom-header -->
+
+   <!-- Check in which locale user is -->
+
+
+  <div class="lia-quilt-row lia-quilt-row-header custom-component-header">
+     <div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-common-header">
+        <div class="lia-quilt-column-alley lia-quilt-column-alley-single">
+           <div class="lia-quilt lia-quilt-header lia-quilt-layout-header lia-component-quilt-header">
+             <div class="lia-quilt-row-first">
+              <div class="lia-quilt-row lia-quilt-row-main-header">
+
+                <div class="lia-quilt-column lia-quilt-column-06 custom-header-left">
+                  <div class="lia-quilt-column-left">
+<div class="lia-slide-out-nav-menu lia-component-common-widget-slide-out-nav-menu">
+    <button li-bindable="" li-common-element-hook="navMenuTriggerElement" class="lia-slide-menu-trigger lia-slide-out-nav-menu-wrapper" li-compiled="true">
+        <div ng-non-bindable="" class="lia-slide-out-nav-menu-title">
+            Browse
+        </div>
+    </button>
+    <li:common-slide-menu li-bindable="" trigger-element="navMenuTriggerElement" li-direction="left" li-compiled="true"><div class="lia-common-slide-menu " ng-swipe-right="swipeToggleMenu(&#39;right&#39;)" ng-swipe-left="swipeToggleMenu(&#39;left&#39;)">
+  <!---->
+  <!---->
+</div>
+</li:common-slide-menu>
+</div>                   <div class="lia-custom-component home-logo"> 
+                    <a class="home-link" href="https://community.box.com/t5/Box-Community/ct-p/English" title="Home">
+                      <span class="link-element community-logo"></span>
+                    </a>
+                   </div>
+                  </div>
+                </div>
+
+                <div class="lia-quilt-column lia-quilt-column-12 custom-header-center">
+                  <div class="lia-quilt-column-center custom-nav-links">
+                    <ul class="categories-list">
+
+
+<!-- Custom home Top links -->
+<link rel="stylesheet" href="./Configuring A Firewall For Box Applications - Box_files/animate.min.css" media="all">
+<link rel="stylesheet" href="./Configuring A Firewall For Box Applications - Box_files/boxmenu.css" media="all">
+<style>
+#lia-body .lia-quilt-row-header ul.categories-list li.main-nav--item > a {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+}
+#lia-body .lia-quilt-row-header ul.categories-list li.main-nav--item > a:hover,
+#lia-body .lia-quilt-row-header ul.categories-list li.main-nav--item > a:focus{
+ color: rgba(255,255,255,1);
+}
+#lia-body .lia-quilt-row-header ul.categories-list li.main-nav--item ul li a{
+  font-size:14px;
+}
+.main-nav--subhead-item--title {
+  font-size: 15px;
+}
+@media screen and (max-width:1199px){
+  #lia-body .lia-quilt-row-header .lia-quilt-header .lia-custom-component.home-logo {
+    max-width: 175px;
+  }
+}
+</style>
+<div class="has-sticky-header masthead-present">
+  <div id="site-header" class="site-header" role="banner" aria-label="Site-Header">
+    <div class="container site-header--wrapper">
+      <a href="https://community.box.com/home" id="block-logo" class="box-logo">
+  <svg id="Layer_1" viewBox="0 0 40 21.6" xmlns="http://www.w3.org/2000/svg"> .box-logo-svg{fill:#22A7F0;} <path class="box-logo-svg" d="M39.7 19.2c.5.7.4 1.6-.2 2.1-.7.5-1.7.4-2.2-.2l-3.5-4.5-3.4 4.4c-.5.7-1.5.7-2.2.2-.7-.5-.8-1.4-.3-2.1l4-5.2-4-5.2c-.5-.7-.3-1.7.3-2.2.7-.5 1.7-.3 2.2.3l3.4 4.5L37.3 7c.5-.7 1.4-.8 2.2-.3.7.5.7 1.5.2 2.2L35.8 14l3.9 5.2zm-18.2-.6c-2.6 0-4.7-2-4.7-4.6 0-2.5 2.1-4.6 4.7-4.6s4.7 2.1 4.7 4.6c-.1 2.6-2.2 4.6-4.7 4.6zm-13.8 0c-2.6 0-4.7-2-4.7-4.6 0-2.5 2.1-4.6 4.7-4.6s4.7 2.1 4.7 4.6c0 2.6-2.1 4.6-4.7 4.6zM21.5 6.4c-2.9 0-5.5 1.6-6.8 4-1.3-2.4-3.9-4-6.9-4-1.8 0-3.4.6-4.7 1.5V1.5C3.1.7 2.4 0 1.6 0 .7 0 0 .7 0 1.5v12.6c.1 4.2 3.5 7.5 7.7 7.5 3 0 5.6-1.7 6.9-4.1 1.3 2.4 3.9 4.1 6.8 4.1 4.3 0 7.8-3.4 7.8-7.7.1-4.1-3.4-7.5-7.7-7.5z"></path></svg>
+</a>
+
+
+      <nav class="main-nav--wrapper" role="navigation" aria-label="Main Menu">
+        <div id="block-mainnavigationblock-v2" class="main-nav">
+          <ul class="main-nav--primary-level">
+
+            <!-- Essential menu  start -->
+           
+          <li id="block-menu-v2-item--2" class="main-nav--item main-nav--item__primary main-nav--item__has-children">
+              <button aria-label="Essentials" class="main-nav--primary-item main-nav--parent-item" data-menu-id="406">
+                Essentials
+              </button>
+              <div class="main-nav--child-wrapper" style="left: 72.2344px;">
+            <div class="main-nav--child-menu">
+              <div id="block-menu-v2-submenu--5" class="main-nav--section">
+                <div class="main-nav--subgroup">
+                  <ul class="main-nav--secondary-level">
+                      <li class="main-nav--item main-nav--item__secondary">
+                        <a href="https://community.box.com/t5/Box-Product-Central/ct-p/ProductCentral">
+                          <i class="ProductCentral"></i>
+                          <span class="main-nav--child-item--title">Box Product Central</span>
+                          <span class="main-nav--child-item--description">
+                            <p>Learn all about Box products</p>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="main-nav--item main-nav--item__secondary">
+                        <a href="https://community.box.com/t5/Cloud-Content-Management/ct-p/CCM">
+                          <i class="CCM"></i>
+                          <span class="main-nav--child-item--title">Cloud Content Management</span>
+                          <span class="main-nav--child-item--description">
+                            <p>Revolutionize how you work</p>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="main-nav--item main-nav--item__secondary">
+                        <a href="https://community.box.com/t5/Getting-Started-for-New-Admins/ct-p/NewAdmin">
+                          <i class="NewAdmin"></i>
+                          <span class="main-nav--child-item--title">Getting Started for New Admins</span>
+                          <span class="main-nav--child-item--description">
+                            <p>All essentials for new Box Admins</p>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="main-nav--item main-nav--item__secondary">
+                        <a href="https://community.box.com/t5/Getting-Started-for-New-Users/ct-p/NewUsers">
+                          <i class="NewUsers"></i>
+                          <span class="main-nav--child-item--title">Getting Started for New Users</span>
+                          <span class="main-nav--child-item--description">
+                            <p>All essentials for new Box users</p>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="main-nav--item main-nav--item__secondary">
+                        <a href="https://community.box.com/t5/Getting-Started-for-New/ct-p/Developers">
+                          <i class="Developers"></i>
+                          <span class="main-nav--child-item--title">Getting Started for New Developers</span>
+                          <span class="main-nav--child-item--description">
+                            <p>All essentials for new Box developers</p>
+                          </span>
+                        </a>
+                      </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Customer-Stories-and/bg-p/UseCaseLibrary">
+                            <i class="UseCaseLibrary"></i>
+                            <span class="main-nav--child-item--title">Box Customer Stories and Presentations</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Use cases, best practices, and more</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Community-News/bg-p/communitynews">
+                            <i class="communitynews"></i>
+                            <span class="main-nav--child-item--title">Box Community News</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Community updates and announcements</p>
+                            </span>
+                          </a>
+                        </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <span class="carat" style="left: 40.7969px;"><span class="carat-mask"></span></span></div>
+          </li>
+          <!-- Essential menu  end-->
+          <!-- Product  menu  start -->
+          <li id="block-menu-v2-item" class="main-nav--item main-nav--item__primary main-nav--item__has-children">
+              <button aria-label="Features" class="main-nav--primary-item main-nav--parent-item" data-menu-id="401">
+                Products
+              </button>
+              <div class="main-nav--child-wrapper" style="left: 127.5px;">
+               <div class="main-nav--child-menu">
+                <!-- Individuals &amp; Teams  sub menu  start -->
+                <div id="block-menu-v2-submenu" class="main-nav--section">
+                  <div class="main-nav--group-heading">
+                    <span class="main-nav--subhead-item--title">
+                      Individuals &amp; Teams
+                    </span>
+                  </div>
+                  <div class="main-nav--subgroup">
+                    <ul class="main-nav--secondary-level">
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Upload-and-Download-Files/ct-p/UploadDownload">
+                            <i class="UploadDownload"></i>
+                            <span class="main-nav--child-item--title">Upload and Download Files</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Adding your content to Box</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Stay-Organized-in-Box/ct-p/StayOrganized">
+                            <i class="StayOrganized"></i>
+                            <span class="main-nav--child-item--title">Stay Organized in Box</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Mark, sort, and easily find your files</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Shared-Links-Collaborators/ct-p/WorkTogether">
+                            <i class="WorkTogether"></i>
+                            <span class="main-nav--child-item--title">Shared Links &amp; Collaborators</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Work together securely in Box</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Account-Info-and-Billing/ct-p/AccountBilling">
+                            <i class="AccountBilling"></i>
+                            <span class="main-nav--child-item--title">Account Info and Billing</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Maintain your settings and configuration</p>
+                            </span>
+                          </a>
+                        </li>
+                    </ul>
+                    <ul class="main-nav--secondary-level">
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Drive/ct-p/BoxDrive">
+                            <i class="BoxDrive"></i>
+                            <span class="main-nav--child-item--title">Box Drive</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Desktop, meet cloud</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Mobile/ct-p/BoxMobile">
+                            <i class="BoxMobile"></i>
+                            <span class="main-nav--child-item--title">Box Mobile</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Securely access your files on any device</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Notes/ct-p/BoxNotes">
+                            <i class="BoxNotes"></i>
+                            <span class="main-nav--child-item--title">Box Notes</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Real-time online note-taking for teams</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Sync/ct-p/BoxSync">
+                            <i class="BoxSync"></i>
+                            <span class="main-nav--child-item--title">Box Sync</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Keep files in sync on all your devices</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Tools/ct-p/BoxEdit">
+                            <i class="BoxEdit"></i>
+                            <span class="main-nav--child-item--title">Box Tools</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Edit and create files directly on Box</p>
+                            </span>
+                          </a>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- Individuals &amp; Teams  sub menu  end -->
+                <!-- Businesss  sub menu  start -->
+                <div id="block-menu-v2-submenu--2" class="main-nav--section ">
+                  <div class="main-nav--group-heading">
+                    <span class="main-nav--subhead-item--title">
+                      Businesses
+                    </span>
+                  </div>
+                  <div class="main-nav--subgroup">
+                    
+                    <ul class="main-nav--secondary-level">
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Relay/ct-p/BoxRelay">
+                            <i class="BoxRelay"></i>
+                            <span class="main-nav--child-item--title">Box Relay</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Workflow made simple</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Admin-Tools/ct-p/BoxAdminConsole">
+                            <i class="BoxAdminConsole"></i>
+                            <span class="main-nav--child-item--title">Box Admin Tools</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Insights and console for admins</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Governance/ct-p/BoxGovernance">
+                            <i class="BoxGovernance"></i>
+                            <span class="main-nav--child-item--title">Box Governance</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Meet legal and compliance requirements</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Shield/ct-p/BoxShield">
+                            <i class="BoxShield"></i>
+                            <span class="main-nav--child-item--title">Box Shield</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Intelligent, frictionless security for the way you work today.</p>
+                            </span>
+                          </a>
+                        </li>
+                    </ul>
+                    <ul class="main-nav--secondary-level">
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Integrations/ct-p/Integrations">
+                            <i class="Integrations"></i>
+                            <span class="main-nav--child-item--title">Box Integrations</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Use any application with Box</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Skills/ct-p/BoxSkills">
+                            <i class="BoxSkills"></i>
+                            <span class="main-nav--child-item--title">Box Skills</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Bring intelligence to your content</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Platform/ct-p/BoxPlatform">
+                            <i class="BoxPlatform"></i>
+                            <span class="main-nav--child-item--title">Box Platform</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Cloud Content Management for your apps</p>
+                            </span>
+                          </a>
+                        </li>
+                    </ul>
+                  
+                <!-- Business  sub menu  end -->
+              </div>
+          </div>
+        </div><span class="carat" style="left: 99.1406px;"><span class="carat-mask"></span></span></div></li>
+        <!-- Product  menu  end -->
+        <!-- Resources  menu  start -->
+        <li id="block-menu-v2-item--4" class="main-nav--item main-nav--item__primary main-nav--item__has-children">
+          <button aria-label="Resources" class="main-nav--primary-item main-nav--parent-item">
+            Resources
+          </button>
+          <div class="main-nav--child-wrapper" style="left: 127.5px;">
+            <div class="main-nav--child-menu">
+              <div id="block-menu-v2-submenu--4" class="main-nav--section">
+                <div class="main-nav--subgroup">
+                  <ul class="main-nav--secondary-level">
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/All-Forums/ct-p/Forums">
+                            <i class="Forums"></i>
+                            <span class="main-nav--child-item--title">All Forums</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Discuss with others and share answers</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Education/ct-p/BoxEducation">
+                            <i class="BoxEducation"></i>
+                            <span class="main-nav--child-item--title">Box Education</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Training resources for cloud professionals</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Certified-Professional/ct-p/BoxCertified">
+                            <i class="BoxCertified"></i>
+                            <span class="main-nav--child-item--title">Box Certified Professional</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Become a digital leader</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Box-Local/ct-p/BoxLocal">
+                            <i class="BoxLocal"></i>
+                            <span class="main-nav--child-item--title">Box Local</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Learn, share and network near you</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/BoxStars/ct-p/BoxStars">
+                            <i class="BoxStars"></i>
+                            <span class="main-nav--child-item--title">BoxStars</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Be a VIP at Box. Be a MVP at work.</p>
+                            </span>
+                          </a>
+                        </li>
+                        <li class="main-nav--item main-nav--item__secondary">
+                          <a href="https://community.box.com/t5/Advisory-Boards/ct-p/AdvisoryBoards">
+                            <i class="AdvisoryBoards"></i>
+                            <span class="main-nav--child-item--title">Advisory Boards</span>
+                            <span class="main-nav--child-item--description">
+                              <p>Private for our advisory board members</p>
+                            </span>
+                          </a>
+                        </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <span class="carat" style="left: 214.109px;"><span class="carat-mask"></span></span></div>
+        </li>
+        <!-- Resources  menu end -->
+        <!-- Support  menu start  -->
+              <li id="block-menu-v2-item--5" class="main-nav--item main-nav--item__primary">
+                <a href="https://community.box.com/t5/Contact-Support/ct-p/BoxSupport" class="main-nav--primary-item">
+                  Support
+                </a>
+              </li>
+        <!-- <li id="block-menu-v2-item--5" class="main-nav--item main-nav--item__primary">
+          <a href="/t5/Contact-Support/ct-p/BoxSupport#" class="main-nav--primary-item">
+            Support
+          </a>
+       </li> -->
+       <!-- Support  menu end  -->
+      </ul>
+      </div>
+      </nav>
+    </div>
+  </div>
+</div>
+<script src="./Configuring A Firewall For Box Applications - Box_files/boxmenu.js.ダウンロード" defer="" async=""></script>            
+                    </ul>
+
+                  </div>
+                </div>
+
+                <div class="lia-quilt-column lia-quilt-column-06 custom-header-right">
+                  <div class="lia-quilt-column-right">
+
+<div class="box-site-status" id="status"><a class="color-dot-green" href="https://status.box.com/" title="All Systems Operational"></a><a href="https://status.box.com/" title="All Systems Operational">Box Status</a></div>
+
+<script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/statuspage.js.ダウンロード" defer=""></script>
+<script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/boxstatus12.js.ダウンロード" defer=""></script>
+<ul role="list" id="list_af81ed01e3f1d8" class="lia-list-standard-inline UserNavigation lia-component-common-widget-user-navigation-modern">
+	
+			
+	
+		
+			
+		
+			
+		
+			
+		
+			<li role="option"><a class="lia-link-navigation registration-link lia-component-users-action-registration" rel="nofollow" id="registrationPageV2_af81ed01e3f1d8" href="https://community.box.com/plugins/common/feature/oauth2sso/sso_login_redirect?referer=https%3A%2F%2Fcommunity.box.com%2Ft5%2FHow-to-Guides-for-Account%2FConfiguring-A-Firewall-For-Box-Applications%2Fta-p%2F12">Register</a></li>
+		
+			<li aria-hidden="true"><span class="separator lia-component-common-widget-user-nav-separator-character">·</span></li>
+		
+			
+		
+			
+		
+			<li role="option"><a class="lia-link-navigation login-link lia-authentication-link lia-component-users-action-login" rel="nofollow" id="loginPageV2_af81ed01e3f1d8" href="https://community.box.com/plugins/common/feature/oauth2sso/sso_login_redirect?referer=https%3A%2F%2Fcommunity.box.com%2Ft5%2FHow-to-Guides-for-Account%2FConfiguring-A-Firewall-For-Box-Applications%2Fta-p%2F12">Sign In</a></li>
+		
+			
+		
+			<li aria-hidden="true"><span class="separator lia-component-common-widget-user-nav-separator-character">·</span></li>
+		
+			
+		
+			
+		
+			<li role="option"><a class="lia-link-navigation faq-link lia-component-help-action-faq" id="faqPage_af81ed01e3f1d8" href="https://community.box.com/t5/help/faqpage">Help</a></li>
+		
+			
+		
+			
+		
+	
+	
+
+		
+</ul>                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lia-quilt-row lia-quilt-row-second">
+
+
+
+
+
+        
+         <div class="lia-quilt-column lia-quilt-column-24 header-search-bar">
+          <div class="search-bar">
+<div id="lia-searchformV32_af81ed0221e475" class="SearchForm lia-search-form-wrapper lia-mode-default lia-component-common-widget-search-form">
+	
+
+	
+		<div class="lia-inline-ajax-feedback">
+			<div class="AjaxFeedback" id="ajaxfeedback_af81ed0221e475"></div>
+			
+	
+
+	
+
+		</div>
+
+	
+
+	
+		<div id="searchautocompletetoggle_af81ed0221e475">	
+	
+		
+
+	
+		<div class="lia-inline-ajax-feedback">
+			<div class="AjaxFeedback" id="ajaxfeedback_af81ed0221e475_0"></div>
+			
+	
+
+	
+
+		</div>
+
+	
+
+	
+			
+            <form enctype="multipart/form-data" class="lia-form lia-form-inline SearchForm" action="https://community.box.com/t5/tkb/v2_4/articlepage.searchformv32.form.form" method="post" id="form_af81ed0221e475" name="form_af81ed0221e475"><div class="t-invisible"><input value="blog-id/howtoguidesaccountinfo/article-id/36" name="t:ac" type="hidden"><input value="search/contributions/page" name="t:cp" type="hidden"><input value="8U6xKuxMzIdYYpTSKipCp0DEekxT1hqN8GbJfwQ-nShTScLRMJ3UhdWYU23BXGPbH38tYvQtJSUwqiWe7xNw5-nV8526_25coi3VwjQXdrqJcvV2qD5BuO15y1vE37AIBrU4imTsQ3ZN8Bcn9WbFCVG7nYeqDeYVMVExFD-p_m2QIGqKANQsQ3d7UitZYCYshfpqbXS3U8KZgKgKSCqWp-1WNLlgbxCxlBXN0IMuqeMqyP0V7zfW-3g0s4pho0_PP2UwVjXiPyLkXIMCG9ILhgsCv97gJ0Rb7WgjK3ApRujwLWOTiYzpMk2ftpcfuG5S0JA9UCtSowlPSBCxJn7uZW1AH-CFevCqaoq6nJeq4z0MIKAUeG3WJLao5SO1qaenlyou9ElzxpNc_t9-2rSMCqm7LMTvoUJO_M7G60Z0wU9THOt7dRKfHZ_4kwK0OVlo9bA4XaBiuPWPLqc1mYNvnvH4gE5L8-Gt92nZBGlk47J_6G15SSKC90VcFlHjT1iwJiJz1ajyrgXJRM2nf4GWH2Nc36Jt-HDrjqk0SpFriLoz_dfm5sCyT7ONQ8kgbG0Zdlzj-u7k4i_o00-OIQIbLCAkenvxZ2oajwBM0NIqw0kjEzehj46TvkdFmxILBrqL67iU7fZL6KonohLy5kyGuMkuzVNtKKRtZ0dztVa65OVPH7lU9kEI68epBcOm2MzCDXBOqUcXPgZBxkGBxmJTjEBWohGRTXvgMCQDu9PHH9n0BpwdpUd8mrrSyERljMpfwBUKIBIdmFCT-0wo5vedcQesej8yMhPUUoPlGP6WwJJ3Nv_ZTPWeK02sntwjoKYvW7hfvjbTfGDzM4V_DOGBX7UNGkPXQeNy5pahDWEE-3VgvR9D_GB6qb3cAbEWen0JIofjDz38vIlRsUkzXFxNPdet0rdyQ87ZXyXrKX6HvFC5AD65XWj_OCCP3LFlyO0ec4EwNh-YjQY7-vNOGyfQIyLxUkRPiFgWIfi1dJtn8UVu8Qo0tavfygIf4zlCtQTPW3Uv-zFQDLGrJ651ZCJdw0twzvaPzPhn2X8lFVxM01P7fPpKpe1PRM741RixBMUH8TulJGDJLpDVO0MZxIaKhyfUAIUiUQNrHLxCFeKhMplDnY1HRs2Pl1EQ6BwrTxY-Jlrenpmn4Y3hlzNCJLXhn3V6qPWEimuTaMldW-U5RCEnMOBJPotFR7P6xXbFmOB6g-yUbw1y5v8Gykojck_bKLoxxbGjHHSbzUHD70viK4SoAk6hnlfEu22FYujoo4NFfquR94lUL7WoP27lCpH-_doJ9lopMwqGgUxFqS--t9o." name="lia-form-context" type="hidden"><input value="TkbArticlePage:blog-id/howtoguidesaccountinfo/article-id/36:searchformv32.form:" name="liaFormContentKey" type="hidden"><input value="BJR3mZgsgXhChjmdyYZbPmMg/lU=:H4sIAAAAAAAAALWRzUrDQBSFr4WuiohF30C3iahdaEUogkWoGgyu5SadptEkE2du+rPpo/gE4kt04c538AHcunJhkkm1VsHE1tVwzx3O+c7M/QuU+3XYkwyF3dVtHpBwrYhcHkjdQIftq02HC7+3s62pyREYRB4Kl4ZSQI0LR8MQ7S7TCEMmSQxrms0F81xLs1AyrWHFItp07DKvvWEyisLNy3Hlef3xrQRLLaikwdw7Q58RVFvX2EPdw8DRzZgncOqDkGBVhTc/w+clbxQlNwS3mZRmZPmulHHU+KG923m9eyoBDML+IRzkxkksKDuS22xA8hZGAATLSj1S6ryuiWm5fw6neU38uGGsZmLS+wdpwlrNVma6Sl9p4VmqwQUYeV3pxipUYu17iaut/whUTU6gmdc4kkxMW87MkwIriT79BYuLKIwccPryCjPzB3Ki/xH5l4gU+R2rKjjg2gQAAA==" name="t:formdata" type="hidden"></div>
+	
+	
+
+	
+
+	
+
+	
+		<div class="lia-inline-ajax-feedback">
+			<div class="AjaxFeedback" id="feedback_af81ed0221e475"></div>
+			
+	
+
+	
+
+		</div>
+
+	
+
+	
+
+	
+
+	
+
+
+	
+	<input value="WaIdWtJjiMsr_-1" name="ticket" type="hidden">
+	
+	<input value="form_af81ed0221e475" id="form_UID" name="form_UID" type="hidden">
+	<input value="" id="form_instance_key" name="form_instance_key" type="hidden">
+	
+                
+
+                
+                    
+                        <span class="lia-search-granularity-wrapper">
+                            <select title="Search Granularity" class="lia-search-form-granularity search-granularity" id="searchGranularity_af81ed0221e475" name="searchGranularity"><option title="All community" selected="selected" value="English|category">All community</option><option title="This category" value="AccountBilling|category">This category</option><option title="Knowledge base" value="howtoguidesaccountinfo|tkb-board">Knowledge base</option><option title="Users" value="user|user">Users</option></select>
+                        </span>
+                    
+                
+
+                <span class="lia-search-input-wrapper">
+                    <span class="lia-search-input-field">
+                        <span class="lia-button-wrapper lia-button-wrapper-secondary lia-button-wrapper-searchForm-action"><input value="searchForm" name="submitContextX" type="hidden"><input class="lia-button lia-button-secondary lia-button-searchForm-action" value="Search" id="submitContext_af81ed0221e475" name="submitContext" type="submit"></span>
+
+                        <input placeholder="Ask your question..." title="Search" class="lia-form-type-text lia-autocomplete-input search-input lia-search-input-message" value="" id="messageSearchField_af81ed0221e475_0" name="messageSearchField" type="text" aria-autocomplete="both" autocomplete="off"><div class="lia-autocomplete-container" style="display: none; position: absolute;"><div class="lia-autocomplete-header">Enter a search word</div><div class="lia-autocomplete-content"><ul></ul></div><div class="lia-autocomplete-footer"><a class="lia-link-navigation lia-autocomplete-toggle-off lia-component-search-action-disable-auto-complete" rel="nofollow" id="disableAutoComplete_af81ed0267701b" href="https://community.box.com/t5/tkb/v2_4/articlepage.disableautocomplete:disableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1">Turn off suggestions</a></div></div>
+                        <input placeholder="Ask your question..." title="Search" class="lia-form-type-text lia-autocomplete-input search-input lia-search-input-tkb-article lia-js-hidden" value="" id="messageSearchField_af81ed0221e475_1" name="messageSearchField_0" type="text" aria-autocomplete="both" autocomplete="off"><div class="lia-autocomplete-container" style="display: none; position: absolute;"><div class="lia-autocomplete-header">Enter a search word</div><div class="lia-autocomplete-content"><ul></ul></div><div class="lia-autocomplete-footer"><a class="lia-link-navigation lia-autocomplete-toggle-off lia-component-search-action-disable-auto-complete" rel="nofollow" id="disableAutoComplete_af81ed02afbf80" href="https://community.box.com/t5/tkb/v2_4/articlepage.disableautocomplete:disableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1">Turn off suggestions</a></div></div>
+                        
+
+	
+		<input placeholder="Search for members by username..." ng-non-bindable="" title="Enter a user name or rank" class="lia-form-type-text UserSearchField lia-search-input-user search-input lia-js-hidden lia-autocomplete-input" value="" id="userSearchField_af81ed0221e475" name="userSearchField" type="text" aria-autocomplete="both" autocomplete="off"><div class="lia-autocomplete-container" style="display: none; position: absolute;"><div class="lia-autocomplete-header">Enter a user name or rank</div><div class="lia-autocomplete-content"><ul></ul></div><div class="lia-autocomplete-footer"><a class="lia-link-navigation lia-autocomplete-toggle-off lia-component-search-action-disable-auto-complete" rel="nofollow" id="disableAutoComplete_af81ed02c7d7b6" href="https://community.box.com/t5/tkb/v2_4/articlepage.disableautocomplete:disableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1">Turn off suggestions</a></div></div>
+	
+
+	
+
+
+                        <input title="Enter a search word" class="lia-form-type-text NoteSearchField lia-search-input-note search-input lia-js-hidden lia-autocomplete-input" value="" id="noteSearchField_af81ed0221e475_0" name="noteSearchField" type="text" aria-autocomplete="both" autocomplete="off"><div class="lia-autocomplete-container" style="display: none; position: absolute;"><div class="lia-autocomplete-header">Enter a search word</div><div class="lia-autocomplete-content"><ul></ul></div><div class="lia-autocomplete-footer"><a class="lia-link-navigation lia-autocomplete-toggle-off lia-component-search-action-disable-auto-complete" rel="nofollow" id="disableAutoComplete_af81ed02deb617" href="https://community.box.com/t5/tkb/v2_4/articlepage.disableautocomplete:disableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1">Turn off suggestions</a></div></div>
+                        <input class="lia-as-search-action-id" name="as-search-action-id" type="hidden">
+                    </span>
+                </span>
+                
+
+                <span class="lia-cancel-search">cancel</span>
+
+                
+            
+</form>
+		
+			<div class="search-autocomplete-toggle-link lia-js-hidden">
+				<span>
+					<a class="lia-link-navigation auto-complete-toggle-on lia-component-search-action-enable-auto-complete" rel="nofollow" id="enableAutoComplete_af81ed0221e475" href="https://community.box.com/t5/tkb/v2_4/articlepage.enableautocomplete:enableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1">Turn on suggestions</a>					
+					<span class="HelpIcon">
+	<a class="lia-link-navigation help-icon lia-tooltip-trigger" id="link_af81ed0221e475" href="https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12#"><span class="lia-img-icon-help lia-fa-icon lia-fa-help lia-fa" alt="Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type." aria-label="Help Icon" role="img" id="display_af81ed0221e475"></span></a>
+</span>
+				</span>
+			</div>
+		
+
+	
+
+	
+
+	
+	
+	
+</div>
+		
+	<div class="spell-check-showing-result">
+		Showing results for&nbsp;<span class="lia-link-navigation show-results-for-link lia-link-disabled" id="showingResult_af81ed0221e475"></span>
+		
+
+	</div>
+	<div>
+		
+		<span class="spell-check-search-instead">
+			Search instead for&nbsp;<a class="lia-link-navigation search-instead-for-link" rel="nofollow" id="searchInstead_af81ed0221e475" href="https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12#"></a>
+		</span>
+
+	</div>
+	<div class="spell-check-do-you-mean lia-component-search-widget-spellcheck">
+		Did you mean:&nbsp;<a class="lia-link-navigation do-you-mean-link" rel="nofollow" id="doYouMean_af81ed0221e475" href="https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12#"></a>
+	</div>
+
+	
+
+	
+
+	
+
+
+	
+</div>          </div>
+         </div>
+            </div>
+           </div>
+        </div>
+     </div>
+  </div>
+
+
+  
+
+		
+			
+		
+	
+	
+</div>
+		</div>
+	</div><div class="lia-quilt-row lia-quilt-row-crumb">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-breadcrumb">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-single">
+	
+		
+			<div aria-label="breadcrumbs" role="navigation" class="BreadCrumb crumb-line lia-breadcrumb lia-component-common-widget-breadcrumb">
+	<ul role="list" id="list" class="lia-list-standard-inline">
+	
+		
+			<li class="lia-breadcrumb-node crumb">
+				<a class="lia-link-navigation crumb-category lia-breadcrumb-category lia-breadcrumb-tkb" id="link_0" href="https://community.box.com/t5/Box-Community/ct-p/English">Community</a>
+			</li>
+			
+				<li aria-hidden="true" class="lia-breadcrumb-seperator crumb-category lia-breadcrumb-category lia-breadcrumb-tkb">
+				  
+          		  		<span class="separator">:</span>
+          		  
+				</li>
+			
+		
+			<li class="lia-breadcrumb-node crumb">
+				<a class="lia-link-navigation crumb-category lia-breadcrumb-category lia-breadcrumb-tkb" id="link_1" href="https://community.box.com/t5/Account-Info-and-Billing/ct-p/AccountBilling">Account Info and Billing</a>
+			</li>
+			
+				<li aria-hidden="true" class="lia-breadcrumb-seperator crumb-category lia-breadcrumb-category lia-breadcrumb-tkb">
+				  
+          		  		<span class="separator">:</span>
+          		  
+				</li>
+			
+		
+			<li class="lia-breadcrumb-node crumb">
+				<a class="lia-link-navigation crumb-board lia-breadcrumb-board lia-breadcrumb-tkb" id="link_2" href="https://community.box.com/t5/How-to-Guides-for-Account/tkb-p/howtoguidesaccountinfo">How to Guides for Account Information</a>
+			</li>
+			
+				<li aria-hidden="true" class="lia-breadcrumb-seperator crumb-board lia-breadcrumb-board lia-breadcrumb-tkb">
+				  
+          		  		<span class="separator">:</span>
+          		  
+				</li>
+			
+		
+			<li class="lia-breadcrumb-node crumb final-crumb">
+				<span class="lia-link-navigation child-thread lia-link-disabled" id="link_3">Configuring A Firewall For Box Applications</span>
+			</li>
+			
+		
+	
+</ul>
+</div>
+		
+	
+	
+</div>
+		</div>
+	</div><div class="lia-quilt-row lia-quilt-row-title">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-page-title lia-mark-empty">
+			
+		</div>
+	</div><div class="lia-quilt-row lia-quilt-row-user">
+		<div class="lia-quilt-column lia-quilt-column-18 lia-quilt-column-left lia-quilt-column-user-navigation lia-mark-empty">
+			
+		</div><div class="lia-quilt-column lia-quilt-column-06 lia-quilt-column-right lia-quilt-column-private-notes lia-mark-empty">
+			
+		</div>
+	</div><div class="lia-quilt-row lia-quilt-row-feedback">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-feedback">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-single">
+	
+		
+			
+	
+
+	
+
+		
+			
+        
+        
+	
+
+	
+
+    
+		
+	
+	
+</div>
+		</div>
+	</div><div class="lia-quilt-row lia-quilt-row-search">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-search-bar">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-single lia-mark-empty">
+	
+		
+			
+		
+	
+	
+</div>
+		</div>
+	</div>
+</div>
+		
+			
+		
+	
+	
+
+	
+		<div class="page-options-wrapper">
+			
+		
+			<h1 class="PageTitle lia-component-common-widget-page-title"><span class="lia-link-navigation lia-link-disabled" id="link_4">Configuring A Firewall For Box Applications</span></h1>
+		
+			
+    <div class="lia-menu-navigation-wrapper lia-menu-action lia-page-options lia-component-community-widget-page-options" id="actionMenuDropDown" style="">	
+	<div class="lia-menu-navigation">
+		<div class="dropdown-default-item"><a title="Show option menu" class="lia-js-menu-opener default-menu-option lia-js-click-menu lia-link-navigation" aria-haspopup="true" aria-expanded="false" role="button" aria-label="Show option menu" id="dropDownLink" href="https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12#">Options</a>
+			<div class="dropdown-positioning">
+				<div class="dropdown-positioning-static">
+					
+	<ul role="listbox" id="dropdownmenuitems" class="lia-menu-dropdown-items">
+		
+
+	
+	
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			<li role="option"><a class="lia-link-navigation article-history lia-component-tkb-action-view-article-history" rel="nofollow" id="articleHistory" href="https://community.box.com/t5/tkb/articlehistorypage/message-revision/12%3A77">Article History</a></li>
+		
+			
+		
+			
+		
+			<li aria-hidden="true"><span class="lia-separator lia-component-common-widget-link-separator">
+	<span class="lia-separator-post"></span>
+	<span class="lia-separator-pre"></span>
+</span></li>
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			<li role="option"><a class="lia-link-navigation rss-thread-link lia-component-rss-action-thread" rel="nofollow noopener noreferrer" id="rssThread" href="https://community.box.com/pjrjx47372/rss/message?board.id=howtoguidesaccountinfo&amp;message.id=36">Subscribe to RSS Feed</a></li>
+		
+			<li aria-hidden="true"><span class="lia-separator lia-component-common-widget-link-separator">
+	<span class="lia-separator-post"></span>
+	<span class="lia-separator-pre"></span>
+</span></li>
+		
+			<li role="option"><span class="lia-link-navigation mark-thread-unread lia-link-disabled lia-component-forums-action-mark-thread-unread" id="markThreadUnread">Mark as New</span></li>
+		
+			<li role="option"><span class="lia-link-navigation mark-thread-read lia-link-disabled lia-component-forums-action-mark-thread-read" id="markThreadRead">Mark as Read</span></li>
+		
+			<li aria-hidden="true"><span class="lia-separator lia-component-common-widget-link-separator">
+	<span class="lia-separator-post"></span>
+	<span class="lia-separator-pre"></span>
+</span></li>
+		
+			
+		
+			<li role="option"><span class="lia-link-navigation addThreadUserBookmark lia-link-disabled lia-component-subscriptions-action-add-thread-user-bookmark" id="addThreadUserBookmark">Bookmark</span></li>
+		
+			
+		
+			<li role="option"><span class="lia-link-navigation addThreadUserEmailSubscription lia-link-disabled lia-component-subscriptions-action-add-thread-user-email" id="addThreadUserEmailSubscription">Subscribe</span></li>
+		
+			<li aria-hidden="true"><span class="lia-separator lia-component-common-widget-link-separator">
+	<span class="lia-separator-post"></span>
+	<span class="lia-separator-pre"></span>
+</span></li>
+		
+			<li role="option"><span class="lia-link-navigation email_friend lia-link-disabled lia-component-forums-action-email-message-to-friend" id="emailMessageToFriend">Email to a Friend</span></li>
+		
+			<li aria-hidden="true"><span class="lia-separator lia-component-common-widget-link-separator">
+	<span class="lia-separator-post"></span>
+	<span class="lia-separator-pre"></span>
+</span></li>
+		
+			<li role="option"><a class="lia-link-navigation print-article lia-component-forums-action-print-thread" rel="noindex, nofollow" id="printThread" href="https://community.box.com/t5/tkb/articleprintpage/tkb-id/howtoguidesaccountinfo/article-id/36">Printer Friendly Page</a></li>
+		
+			<li role="option"><a class="lia-link-navigation report-abuse-link lia-component-forums-action-report-abuse" rel="noindex, nofollow" id="reportAbuse" href="https://community.box.com/t5/notifications/notifymoderatorpage/message-uid/12">Report Inappropriate Content</a></li>
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+	
+	
+
+
+	</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+		
+	
+		</div>
+	
+	
+</div>
+		</div>
+	</div><div class="lia-quilt-row lia-quilt-row-main">
+		<div class="lia-quilt-column lia-quilt-column-18 lia-quilt-column-left lia-quilt-column-main-content">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-left">
+	
+		
+			
+			<div data-lia-message-uid="12" class="lia-message-view-wrapper lia-js-data-messageUid-12 lia-component-article" id="messageview2">
+	<span id="U12"> </span>
+	<span id="M36"> </span>
+	
+	
+
+	
+
+	
+
+	
+		<div class="lia-inline-ajax-feedback">
+			<div class="AjaxFeedback" id="ajaxfeedback"></div>
+			
+	
+
+	
+
+		</div>
+
+	
+
+	
+		<div class="MessageView lia-message-view-tkb-message lia-message-view-display lia-row-standard-unread lia-thread-topic">
+			<span class="lia-message-state-indicator"></span>
+			<div class="lia-quilt lia-quilt-tkb-message lia-quilt-layout-tkb-message">
+	<div class="lia-quilt-row">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-main">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-single">
+	
+		
+			<div class="lia-quilt lia-quilt-tkb-message-main lia-quilt-layout-two-column-18-6 lia-component-quilt-tkb-message-main">
+	<div class="lia-quilt-row lia-quilt-row-row">
+		<div class="lia-quilt-column lia-quilt-column-18 lia-quilt-column-left lia-quilt-column-left-content">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-left">
+	
+		
+			<div class="lia-message-subject lia-component-message-view-widget-subject">
+		<div class="MessageSubject">
+
+	
+
+	
+			<div class="MessageSubjectIcons ">
+	
+	
+	 
+	
+	
+	
+				
+		<h2 itemprop="name" class="message-subject">
+			<span class="lia-message-unread">
+				
+						<a class="page-link lia-link-navigation lia-custom-event" id="link_5" href="https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12">
+							Configuring A Firewall For Box Applications
+							
+						</a>
+					
+			</span>
+		</h2>
+	
+			
+	
+	<span class="lia-img-message-has-url lia-fa-message lia-fa-has lia-fa-url lia-fa" title="Contains a hyperlink" alt="Message contains a hyperlink" aria-label="Contains a hyperlink" role="img" id="display_2"></span>
+	
+	
+	
+</div>
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+			
+					
+				
+		
+
+	
+</div>
+	</div>
+		
+			<div class="lia-message-body-wrapper lia-component-message-view-widget-body">
+		<div itemprop="text" id="bodyDisplay" class="lia-message-body">
+	
+		<div class="lia-message-body-content">
+			
+				
+					
+					
+						<div class="lia-message-template-content-zone">
+<div class="article-body">
+<h2 id="toc-hId--714406911"><strong>When configuring your firewall to allow Box as a trusted source, please use the steps outlined below:</strong></h2>
+<p><strong>1.</strong> Use our site's domain names instead of a particular site IP address, as IP addresses can change frequently and without notice. Please configure hostnames to recognize any <strong>subdomain</strong> of:</p>
+<ul>
+<li>*.box.com</li>
+<li>*.box.net</li>
+<li>*.boxcdn.net</li>
+<li>*.boxcloud.com</li>
+<li>*.boxrelay.com</li>
+</ul>
+<p>To use the <a href="https://community.box.com/t5/How-to-Guides-for-Managing/Excel-Online-Previewer/ta-p/30633" target="_self">Excel Online Previewer</a>, you must allow the following specific hostnames:</p>
+<ul>
+<li>c1-excel-15.cdn.office.net</li>
+<li>excel.officeapps.live.com</li>
+<li>fs.microsoft.com</li>
+<li>s1-excel-15.cdn.office.net</li>
+</ul>
+<p>To use the <a href="https://community.box.com/t5/How-to-Guides-for-Integrations/Box-for-Office-Integrations/ta-p/324#bfo_officeonline" target="_self">Box for Office Online integration</a>, please allow Microsoft's for <a href="https://docs.microsoft.com/en-us/office365/enterprise/urls-and-ip-address-ranges?redirectSourcePath=%252fen-gb%252farticle%252foffice-365-urls-and-ip-address-ranges-8548a211-3fe7-47cb-abb1-355ea5aa88a2" target="_self" rel="nofollow noopener noreferrer">Office 365 URLs and IP address ranges</a>.</p>
+<p>&nbsp;</p>
+<p>To use the Google Captcha feature, you must allow the following specific hostnames:</p>
+<ul>
+<li><a class="external-link" title="Follow link" href="https://www.gstatic.com/" target="_blank" rel="nofollow noopener noopener noreferrer">https://www.gstatic.com</a></li>
+<li><a class="external-link" title="Follow link" href="https://www.google.com/recaptcha/api2/" target="_blank" rel="nofollow noopener noopener noreferrer">https://www.google.com/recaptcha/api2/</a></li>
+</ul>
+<p>To use the <a href="https://community.box.com/t5/Box-for-G-Suite-User-Guide/Introducing-Box-for-G-Suite/ta-p/60494" target="_self">Box for G Suite integration</a>, please go to <a href="https://support.google.com/a/answer/2589954?hl=en" target="_self" rel="nofollow noopener noreferrer">the Google support pages</a> for the hostnames you must allow. (You can ignore the Google Drive/drive IP addresses because this Box integration does not have a dependency on Google Drive.)</p>
+<p>&nbsp;</p>
+<p>To use the <a href="https://community.box.com/t5/How-to-Guides-for-Integrations/iWork-Integration/ta-p/51366" target="_self">Box for iWork integration</a>, you must allow access to Apple’s network at 17.0.0.0/8</p>
+<p>&nbsp;</p>
+<p>If you are unable to whitelist the wildcard domains shown in the list above, please allow these <strong>specific hostnames</strong>:</p>
+<ul>
+<li>a.box.com</li>
+<li>account.box.com</li>
+<li>api.box.com</li>
+<li>app.box.com</li>
+<li>app.boxrelay.com</li>
+<li>blog.box.com</li>
+<li>cdn01.boxcdn.net - cdn20.boxcdn.net</li>
+<li>community.box.com</li>
+<li>developer.box.com</li>
+<li>dl.boxcloud.com</li>
+<li>dl2.boxcloud.com - dl20.boxcloud.com</li>
+<li>docs.box.com</li>
+<li>e3.boxcdn.net</li>
+<li>ent.box.com</li>
+<li>m.account.box.com</li>
+<li>m.app.box.com</li>
+<li>m.box.com</li>
+<li>m.ent.box.com</li>
+<li>notes.services.box.com</li>
+<li>public.boxcloud.com</li>
+<li>sso.services.box.net</li>
+<li>status.box.com</li>
+<li>support.box.com</li>
+<li>upload.app.box.com</li>
+<li>upload.box.com</li>
+<li>upload.box.net</li>
+<li>upload.ent.box.com</li>
+<li><a href="http://www.box.com/" target="_blank" rel="noopener nofollow noopener noreferrer">www.box.com</a></li>
+<li><a href="http://www.box.net/" target="_blank" rel="noopener nofollow noopener noreferrer">www.box.net</a></li>
+<li>{yourcustomsubdomain}.account.box.com</li>
+<li>{yourcustomsubdomain}.app.box.com</li>
+<li>{yourcustomsubdomain}.box.com</li>
+<li>{yourcustomsubdomain}.ent.box.com</li>
+<li>2.realtime.services.box.net</li>
+</ul>
+<p style="padding-left: 30px;">&nbsp;</p>
+<p><strong>2.</strong> Enable <strong>HTTPS (port 443)</strong> for the domains above.</p>
+<p>&nbsp;</p>
+<p>Due to the numerous firewalls available, we cannot provide specific instructions for each firewall beyond what is listed above. If you are using a firewall or proxy such as <strong>Forcepoint/Websense</strong>, <strong>Blue Coat</strong>, and so on, please create a <a href="https://community.box.com/t5/custom/page/page-id/BoxSearchLithiumTKB" target="_blank" rel="noopener">Box Product Support</a> case and request the additional hostnames that are used with Enterprise accounts.</p>
+<p>&nbsp;</p>
+<h2 id="toc-hId--714377120"><strong>Whitelisting for Box Zones</strong></h2>
+<p>If you have configured a firewall, you can whitelist the following Box Zones domains.&nbsp;</p>
+<p><strong>Canada</strong></p>
+<ul>
+<li>fupload-ec2cac1.app.box.com</li>
+<li>fupload-ec2cac1.ent.box.com</li>
+<li>ec2cac1.boxcloud.com</li>
+</ul>
+<p><strong>Germany</strong></p>
+<ul>
+<li>fupload-ec2euc1.app.box.com</li>
+<li>fupload-ec2euc1.ent.box.com</li>
+<li>ec2euc1.boxcloud.com</li>
+<li>ec2euw2.boxcloud.com</li>
+</ul>
+<p><strong>Japan</strong></p>
+<ul>
+<li>fupload-ec2apne1.app.box.com</li>
+<li>fupload-ec2apne1.ent.box.com</li>
+<li>ec2apne1.boxcloud.com</li>
+</ul>
+<p><strong>Sydney, Australia</strong></p>
+<ul>
+<li>fupload-ec2apse2.app.box.com</li>
+<li>fupload-ec2apse2.ent.box.com</li>
+<li>ec2apse2.boxcloud.com</li>
+</ul>
+<p><strong>USA</strong></p>
+<ul>
+<li>fupload-ec2usw1.app.box.com</li>
+<li>fupload-ec2usw1.ent.box.com</li>
+<li>dl3.boxcloud.com</li>
+</ul>
+<p>&nbsp;</p>
+<h2 id="toc-hId--714347329"><span class="wysiwyg-font-size-x-large"><strong>Box Desktop Applications' Proxy&nbsp;Support</strong></span></h2>
+<p><span class="wysiwyg-font-size-x-large">Box Drive, Box Sync, Box Tools, Box for Office, and Box Notes Desktop are desktop applications that need to connect to Box's data centers to function. The apps utilize the same domains outlined above.</span></p>
+<p>&nbsp;</p>
+<p><span class="wysiwyg-font-size-x-large">The apps detect and use the proxy configured for the local machine via:</span></p>
+<ul>
+<li>Automatic Proxy Detection&nbsp;</li>
+<li>Proxy Auto-Configuration (PAC file)
+<ul>
+<li>Windows does not support local&nbsp;file path schemas for the .pac file location such as&nbsp;file://C:\proxy.pac.&nbsp;Use a URL to configure the .pac file location.</li>
+</ul>
+</li>
+<li>Or manually setting the proxy server address for <strong>HTTP</strong> and <strong>HTTPS&nbsp;</strong>protocols</li>
+</ul>
+<span>For proxy authentication support:</span>
+<ul>
+<li>Windows apps support NTLMv1 or NTLMv2 authentication
+<ul>
+<li>Box for Office, Box Tools (machine-wide build), and Box Sync use a Windows Service that needs to connect to Box's data centers to check for new versions. The&nbsp;Windows Services run as the SYSTEM user, which may be unable to authenticate using NTLM. We recommend allowing SYSTEM run Services to connect through your proxy without authentication.&nbsp;</li>
+</ul>
+</li>
+<li>Mac apps support NTLMv1 authentication only.&nbsp;</li>
+<li>Basic Authentication is not supported.</li>
+</ul>
+<div>
+<h2 id="toc-hId--714317538"><span class="wysiwyg-font-size-x-large"><strong>Testing Connectivity to Box Domains</strong></span></h2>
+<p>To&nbsp;test whether your browser can connect to various Box domains, go to our&nbsp;<strong><a href="https://community.box.com/t5/Managing-Your-Content/Box-Connectivity-Tests/ta-p/336" target="_self">Connectivity Testing</a></strong> <span>page. Each test image is hosted on a different Box URL.</span></p>
+</div>
+</div>
+</div>
+					
+				
+			
+			
+			
+				
+			
+			
+			
+			
+			
+			
+		</div>
+		
+		
+	
+
+	
+	
+</div>
+	</div>
+		
+	
+	
+</div>
+		</div><div class="lia-quilt-column lia-quilt-column-06 lia-quilt-column-right lia-quilt-column-right-content">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-right">
+	
+		
+			<div class="lia-panel lia-panel-standard ArticleRevisionInfoTaplet Chrome lia-component-tkb-widget-article-revision-info-taplet"><div class="lia-decoration-border"><div class="lia-decoration-border-top"><div> </div></div><div class="lia-decoration-border-content"><div><div class="lia-panel-heading-bar-wrapper"><div class="lia-panel-heading-bar"><span aria-level="4" role="heading" class="lia-panel-heading-bar-title">Version history</span></div></div><div class="lia-panel-content-wrapper"><div class="lia-panel-content"><div class="lia-revision-info-wrapper">
+    <div class="lia-revision-info-content">
+        <div class="lia-revision-info-row lia-revision-current-rev-row">
+            <div class="lia-revision-info-title-cell">
+                Revision #:
+            </div>
+            <div class="lia-revision-info-data-cell">
+                77 of 77
+            </div>
+        </div>
+        <div class="lia-revision-info-row lia-revision-last-update-row">
+            <div class="lia-revision-info-title-cell">
+                Last update:
+            </div>
+            <div class="lia-revision-info-data-cell">
+                <span class="DateTime">
+    
+
+	
+		
+		
+		<span class="local-date">‎10-15-2019</span>
+	
+		
+		<span class="local-time">08:25 AM</span>
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</span>
+            </div>
+        </div>
+        <div class="lia-revision-info-row lia-revision-author-row">
+            <div class="lia-revision-info-title-cell">
+                Updated by:
+            </div>
+            <div class="lia-revision-info-data-cell">
+                
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_6" href="https://community.box.com/t5/user/viewprofilepage/user-id/1393553"><span class="login-bold">cfine1</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+            </div>
+        </div>
+        <div class="lia-revision-info-row lia-revision-article-history-link-row">
+            <div class="lia-revision-info-title-cell">
+                &nbsp;
+            </div>
+            <div class="lia-revision-info-data-cell">
+                <a class="lia-link-navigation lia-article-history-link" target="_blank" rel="nofollow" id="link_7" href="https://community.box.com/t5/tkb/articlehistorypage/message-revision/12%3A77">View article history</a>
+            </div>
+        </div>
+    </div>
+</div></div></div></div></div><div class="lia-decoration-border-bottom"><div> </div></div></div></div>
+		
+			
+		
+			
+		
+			
+		
+			<div class="ContributorsTaplet lia-component-tkb-widget-contributors-taplet" id="contributorsTaplet">
+	<div class="lia-panel lia-panel-standard">
+	<div class="lia-decoration-border">
+		<div class="lia-decoration-border-top"><div> </div></div>
+		<div class="lia-decoration-border-content">
+			<div>
+				
+					<div class="lia-panel-heading-bar-wrapper">
+						<div class="lia-panel-heading-bar">
+							<span aria-level="4" role="heading" class="lia-panel-heading-bar-title">
+								
+			Contributors
+		
+							</span>
+						</div>
+					</div>
+				
+				<div class="lia-panel-content-wrapper">
+					<div class="lia-panel-content">
+						
+			
+			<ul role="list" id="list_0" class="lia-list-standard">
+	
+				<li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-101 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_8" href="https://community.box.com/t5/user/viewprofilepage/user-id/101"><img class="lia-user-avatar-message" title="derekzhao" alt="derekzhao" id="display" src="./Configuring A Firewall For Box Applications - Box_files/2">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_9" href="https://community.box.com/t5/user/viewprofilepage/user-id/101"><span class="login-bold">derekzhao</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-1208841 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_10" href="https://community.box.com/t5/user/viewprofilepage/user-id/1208841"><img class="lia-user-avatar-message" title="jerryfranklin" alt="jerryfranklin" id="display_0" src="./Configuring A Firewall For Box Applications - Box_files/2(1)">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_11" href="https://community.box.com/t5/user/viewprofilepage/user-id/1208841"><span class="login-bold">jerryfranklin</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-1393553 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_12" href="https://community.box.com/t5/user/viewprofilepage/user-id/1393553"><img class="lia-user-avatar-message" title="cfine1" alt="cfine1" id="display_1" src="./Configuring A Firewall For Box Applications - Box_files/2(2)">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_13" href="https://community.box.com/t5/user/viewprofilepage/user-id/1393553"><span class="login-bold">cfine1</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-2525 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_14" href="https://community.box.com/t5/user/viewprofilepage/user-id/2525"><img class="lia-user-avatar-message" title="Karna" alt="Karna" id="display_3" src="./Configuring A Firewall For Box Applications - Box_files/boxboxbox.png">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_15" href="https://community.box.com/t5/user/viewprofilepage/user-id/2525"><span class="login-bold">Karna</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-91 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_16" href="https://community.box.com/t5/user/viewprofilepage/user-id/91"><img class="lia-user-avatar-message" title="Tim" alt="Tim" id="display_4" src="./Configuring A Firewall For Box Applications - Box_files/2(3)">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_17" href="https://community.box.com/t5/user/viewprofilepage/user-id/91"><span class="login-bold">Tim</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-754111 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_18" href="https://community.box.com/t5/user/viewprofilepage/user-id/754111"><img class="lia-user-avatar-message" title="sdula" alt="sdula" id="display_5" src="./Configuring A Firewall For Box Applications - Box_files/Screen Shot 2017-06-20 at 8.11.30 AM.png">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_19" href="https://community.box.com/t5/user/viewprofilepage/user-id/754111"><span class="login-bold">sdula</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-6 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_20" href="https://community.box.com/t5/user/viewprofilepage/user-id/6"><img class="lia-user-avatar-message" title="UserServices" alt="UserServices" id="display_6" src="./Configuring A Firewall For Box Applications - Box_files/box.png">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_21" href="https://community.box.com/t5/user/viewprofilepage/user-id/6"><span class="login-bold">UserServices</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-25187 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_22" href="https://community.box.com/t5/user/viewprofilepage/user-id/25187"><img class="lia-user-avatar-message" title="cselvaraj" alt="cselvaraj" id="display_7" src="./Configuring A Firewall For Box Applications - Box_files/2(4)">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_23" href="https://community.box.com/t5/user/viewprofilepage/user-id/25187"><span class="login-bold">cselvaraj</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-48 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_24" href="https://community.box.com/t5/user/viewprofilepage/user-id/48"><img class="lia-user-avatar-message" title="brent" alt="brent" id="display_8" src="./Configuring A Firewall For Box Applications - Box_files/40740_446479616846_53004_n.jpg">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Community-Manager">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_25" href="https://community.box.com/t5/user/viewprofilepage/user-id/48"><span class="login-bold">brent</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li><li class="contributing-user">
+					<div class="UserProfileSummary lia-user-item lia-js-data-userId-10599 lia-user-info-group">
+	
+
+	
+
+	
+
+	
+
+	
+			
+		<div class="UserAvatar lia-user-avatar lia-component-common-widget-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" tabindex="-1" target="_self" id="link_26" href="https://community.box.com/t5/user/viewprofilepage/user-id/10599"><img class="lia-user-avatar-message" title="kparmar" alt="kparmar" id="display_9" src="./Configuring A Firewall For Box Applications - Box_files/2(5)">
+					
+				</a>
+				
+			
+		
+</div>
+	
+		
+
+	<div class="lia-user-attributes">
+		
+			
+		<div class="lia-user-name">
+			
+	
+
+	
+			<span class="UserName lia-user-name lia-user-rank-Box-Employee">
+				
+		
+		
+			<a class="lia-link-navigation lia-page-link lia-user-name-link" style="color:#0061D5" target="_self" id="link_27" href="https://community.box.com/t5/user/viewprofilepage/user-id/10599"><span class="login-bold">kparmar</span></a>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+			</span>
+		
+
+		</div>
+	
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+	</div>
+</div>
+				</li>
+			
+</ul>
+		
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="lia-decoration-border-bottom"><div> </div></div>
+	</div>
+</div>
+</div>
+		
+			<div class="lia-panel lia-panel-standard MessageTagsTaplet Chrome lia-component-message-view-widget-tags"><div class="lia-decoration-border"><div class="lia-decoration-border-top"><div> </div></div><div class="lia-decoration-border-content"><div><div class="lia-panel-heading-bar-wrapper"><div class="lia-panel-heading-bar"><span aria-level="4" role="heading" class="lia-panel-heading-bar-title">Tags <span class="lia-panel-heading-bar-count">(4)</span></span></div></div><div class="lia-panel-content-wrapper"><div class="lia-panel-content">
+    <div id="taglist" class="TagList lia-message-tags">
+
+	
+
+	<ul role="list" id="list_1" class="lia-list-standard-inline" aria-label="Find more articles tagged with">
+	<li class="tag-126 lia-tag-list-item"><a class="lia-link-navigation lia-tag tag tag-126 lia-js-data-tagUid-126" rel="tag" id="link_28" href="https://community.box.com/t5/tag/Box%20Servers/tg-p/board-id/howtoguidesaccountinfo">Box Servers</a><div class="tag-list-js-confirmation hidden"></div></li><li class="tag-123 lia-tag-list-item"><a class="lia-link-navigation lia-tag tag tag-123 lia-js-data-tagUid-123" rel="tag" id="link_29" href="https://community.box.com/t5/tag/Firewall/tg-p/board-id/howtoguidesaccountinfo">Firewall</a><div class="tag-list-js-confirmation hidden"></div></li><li class="tag-125 lia-tag-list-item"><a class="lia-link-navigation lia-tag tag tag-125 lia-js-data-tagUid-125" rel="tag" id="link_30" href="https://community.box.com/t5/tag/Proxy/tg-p/board-id/howtoguidesaccountinfo">Proxy</a><div class="tag-list-js-confirmation hidden"></div></li><li class="tag-124 lia-tag-list-item"><a class="lia-link-navigation lia-tag tag tag-124 lia-js-data-tagUid-124" rel="tag" id="link_31" href="https://community.box.com/t5/tag/Whitelisting/tg-p/board-id/howtoguidesaccountinfo">Whitelisting</a><div class="tag-list-js-confirmation hidden"></div></li>
+</ul>
+
+	
+		<div class="lia-inline-ajax-feedback">
+			<div class="AjaxFeedback" id="ajaxFeedback"></div>
+			
+	
+
+	
+
+		</div>
+
+	
+
+	
+
+</div>
+	
+</div></div></div></div><div class="lia-decoration-border-bottom"><div> </div></div></div></div>
+		
+	
+	
+</div>
+		</div>
+	</div>
+</div>
+		
+	
+	
+</div>
+		</div>
+	</div><div class="lia-quilt-row">
+		<div class="lia-quilt-column lia-quilt-column-16 lia-quilt-column-left lia-quilt-column-footer-left">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-left lia-mark-empty">
+	
+		
+			
+		
+			
+		
+			
+					
+		
+	
+				
+		
+			
+					
+		
+	
+				
+		
+	
+	
+</div>
+		</div><div class="lia-quilt-column lia-quilt-column-08 lia-quilt-column-right lia-quilt-column-footer-right">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-right">
+	
+		
+			
+			
+
+	
+		<div class="lia-inline-ajax-feedback">
+			<div class="AjaxFeedback" id="ajaxFeedback_0"></div>
+			
+	
+
+	
+
+		</div>
+
+	
+
+	
+			<div data-lia-kudos-id="12" id="kudosButtonV2" class="KudosButton lia-button-image-kudos-wrapper lia-component-kudos-widget-button-version-3 lia-component-kudos-widget-button-vertical lia-component-kudos-widget-button lia-component-kudos">
+	
+			<div class="lia-button-image-kudos lia-button-image-kudos-vertical lia-button-image-kudos-enabled lia-button-image-kudos-not-kudoed lia-button-image-kudos-has-kudoes lia-button-image-kudos-has-kudos lia-button">
+				
+		
+			
+		
+			
+				<div aria-atomic="true" aria-live="assertive" class="lia-button-image-kudos-count">
+					<a class="lia-link-navigation kudos-count-link" title="Click here to see who gave kudos to this post." id="link_32" href="https://community.box.com/t5/kudos/messagepage/board-id/howtoguidesaccountinfo/message-id/36/tab/all-users">
+						<span itemprop="upvoteCount" aria-label="Kudos Count 20" id="messageKudosCount_af81ed09404ed6" class="MessageKudosCount lia-component-kudos-widget-message-kudos-count">
+	
+			20
+		
+</span><span class="lia-button-image-kudos-label lia-component-kudos-widget-kudos-count-label">
+	Kudos
+</span>
+					</a>
+				</div>
+			
+			
+		
+
+	
+		
+    	
+        <div title="Click here to give kudos to this post." class="lia-button-image-kudos-give">
+            <a onclick="return LITHIUM.EarlyEventCapture(this, &#39;click&#39;, true)" class="lia-link-navigation kudos-link" role="button" data-lia-kudos-entity-uid="12" aria-label="Click here to give kudos to this post." title="Click here to give kudos to this post." rel="nofollow" id="kudoEntity" href="https://community.box.com/t5/tkb/v2_4/articlepage.kudosbuttonv2.kudoentity:kudoentity/kudosable-gid/12?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=kudos/contributions/tapletcontributionspage&amp;ticket=WaIdWtJjiMsr_-1">
+				
+                	
+				
+                
+            </a>
+        </div>
+	
+    
+			</div>
+		
+
+	
+
+	
+
+	
+
+    
+
+	
+
+	
+</div>
+			
+
+	
+
+	
+
+
+		
+		
+			
+            
+        
+		
+			
+					
+		<div class="lia-button-group lia-component-comment-button lia-component-message-view-widget-comment-button">
+	
+			
+		
+</div>
+	
+				
+		
+			
+					
+		<div class="lia-button-group lia-component-share-button lia-component-message-view-widget-share-button">
+	
+			
+		
+</div>
+	
+				
+		
+	
+	
+</div>
+		</div>
+	</div>
+</div>
+		</div>
+	
+
+	
+
+	
+
+
+</div>
+		
+		
+			
+			
+		
+		
+			
+		
+			<div>
+<br>
+</div>
+		
+			
+            <a name="comments"> </a>
+            
+			<a class="lia-component-comments" name="comment-on-this"></a>
+            
+		
+		
+	
+	
+</div>
+		</div><div class="lia-quilt-column lia-quilt-column-06 lia-quilt-column-right lia-quilt-column-side-content">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-right">
+	
+		
+			<div class="lia-panel more-guide">
+	<div class="lia-panel-content-wrapper">
+		<div class="lia-panel-content">
+			<h4 style="padding-bottom: 10px;">More in this guide:</h4>
+						<ul>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Problems-Logging-Into-Box/ta-p/9">Problems Logging Into Box</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Logging-in-with-Single-Sign-On-SSO/ta-p/7304">Logging in with Single Sign On (SSO)</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Enrolling-in-2FA-for-External-Collaboration/ta-p/69157">Enrolling in 2FA for External Collaboration</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Reset-My-Box-Account-Password/ta-p/686">Reset My Box Account Password</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Logging-in-to-Box/ta-p/677">Logging in to Box</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Languages-Supported-by-Box/ta-p/66">Languages Supported by Box</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Box-Drive-and-VMWare-Horizon-Writable-Volumes/ta-p/64743">Box Drive and VMWare Horizon Writable Volumes</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/ISO-27001-Certification-Overview-and-FAQ/ta-p/61">ISO 27001 Certification Overview and FAQ</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Two-Factor-Authentication-Set-Up-for-Your-Account/ta-p/57714">Two-Factor Authentication Set Up for Your Account</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Box-SSO-Working-with-External-Passwords/ta-p/52034">Box + SSO: Working with External Passwords</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/What-is-2-step-Verification/ta-p/50">What is 2-step Verification?</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/How-Does-Box-Prevent-Clickjacking/ta-p/48">How Does Box Prevent Clickjacking?</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Understand-How-Box-Measures-Bandwidth-Usage/ta-p/44">Understand How Box Measures Bandwidth Usage</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Enhanced-Security/ta-p/39">Enhanced Security</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Data-Encryption-at-Box/ta-p/32">Data Encryption at Box</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Using-A-Box-Com-For-Accessibility/ta-p/2781">Using A.Box.Com For Accessibility</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Manage-Account-Settings/ta-p/20022">Manage Account Settings</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/HIPAA-and-HITECH/ta-p/19828">HIPAA and HITECH</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Language-and-Time-Zones/ta-p/19825">Language and Time Zones</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/How-To-Disable-Plugins-Add-Ons-Extensions-In-Multiple-Browsers/ta-p/19">How To Disable Plugins/Add-Ons/Extensions In Multiple Browsers</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Ransomware/ta-p/16669">Ransomware</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Box-HIPAA-and-HITECH-Overview-and-FAQ/ta-p/16">Box HIPAA and HITECH Overview and FAQ</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/How-Do-I-Clear-The-Cache-And-Cookies-In-My-Browser/ta-p/14">How Do I Clear The Cache And Cookies In My Browser?</a></li>
+						<li><a href="https://community.box.com/t5/How-to-Guides-for-Account/Using-Box-In-Virtual-Environments/ta-p/1254">Using Box In Virtual Environments</a></li>
+						<li>Configuring A Firewall For Box Applications</li>
+			</ul>
+			<br>
+			<p><a href="https://community.box.com/t5/top/tkb-p/howtoguidesaccountinfo">Go to Guide</a></p>
+		</div>
+	</div>
+</div>
+		
+			<div class="lia-panel lia-panel-standard MessageListTaplet Chrome lia-component-recommendations-widget-recommended-content-taplet" li-common-non-bindable=""><div class="lia-decoration-border"><div class="lia-decoration-border-top"><div> </div></div><div class="lia-decoration-border-content"><div><div class="lia-panel-heading-bar-wrapper"><div class="lia-panel-heading-bar"><span aria-level="4" role="heading" class="lia-panel-heading-bar-title">Recommendations</span></div></div><div class="lia-panel-content-wrapper"><div class="lia-panel-content">
+
+	
+
+	
+
+	
+
+	
+	
+
+	
+		
+		<ul role="list" id="list_af81ed53b9706e_70bf1" class="lia-list-standard">
+	
+	
+		<li>
+			<div class="lia-list-slim">
+				
+				<div class="lia-message-content">
+					<div class="MessageSubject">
+
+	
+
+	
+			<div class="MessageSubjectIcons ">
+	<span class="lia-img-icon-tkb-thread lia-fa-icon lia-fa-tkb lia-fa-thread lia-fa lia-icon-discussion-style" title="Knowledge Base Article" alt="This is an article" aria-label="Knowledge Base Article" role="img" id="imagedisplay_af81ed53b9706e_70bf1"></span>
+	
+	 
+	
+	
+	
+				
+		<h2 itemprop="name" class="message-subject">
+			<span class="lia-message-unread">
+				
+						<a class="page-link lia-link-navigation lia-custom-event" id="link_2_af81ed53b9706e_70bf1" href="https://community.box.com/t5/How-to-Guides-for-Account/Understand-the-Box-Policy-For-Browser-And-OS-Support/ta-p/10">
+							Understand the Box Policy For Browser And OS Suppo...
+							
+						</a>
+					
+			</span>
+		</h2>
+	
+			
+	
+	<span class="lia-img-message-has-url lia-fa-message lia-fa-has lia-fa-url lia-fa" title="Contains a hyperlink" alt="Message contains a hyperlink" aria-label="Contains a hyperlink" role="img" id="display_2_af81ed53b9706e_70bf1"></span>
+	
+	
+	
+</div>
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+			
+					
+				
+		
+
+	
+</div>
+					
+					
+				</div>
+			</div>
+		</li>
+	
+		<li>
+			<div class="lia-list-slim">
+				
+				<div class="lia-message-content">
+					<div class="MessageSubject">
+
+	
+
+	
+			<div class="MessageSubjectIcons ">
+	<span class="lia-img-icon-tkb-thread lia-fa-icon lia-fa-tkb lia-fa-thread lia-fa lia-icon-discussion-style" title="Knowledge Base Article" alt="This is an article" aria-label="Knowledge Base Article" role="img" id="imagedisplay_af81ed53b9706e_0_70bf1"></span>
+	
+	 
+	
+	
+	
+				
+		<h2 itemprop="name" class="message-subject">
+			<span class="lia-message-unread">
+				
+						<a class="page-link lia-link-navigation lia-custom-event" id="link_2_af81ed53b9706e_0_70bf1" href="https://community.box.com/t5/How-to-Guides-for-Account/Using-A-Box-Com-For-Accessibility/ta-p/2781">
+							Using A.Box.Com For Accessibility
+							
+						</a>
+					
+			</span>
+		</h2>
+	
+			
+	
+	<span class="lia-img-message-has-url lia-fa-message lia-fa-has lia-fa-url lia-fa" title="Contains a hyperlink" alt="Message contains a hyperlink" aria-label="Contains a hyperlink" role="img" id="display_2_af81ed53b9706e_0_70bf1"></span>
+	<span class="lia-img-message-has-image lia-fa-message lia-fa-has lia-fa-image lia-fa" title="Contains an image" alt="Message contains an image" aria-label="Contains an image" role="img" id="display_3_af81ed53b9706e_70bf1"></span>
+	
+	
+</div>
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+			
+					
+				
+		
+
+	
+</div>
+					
+					
+				</div>
+			</div>
+		</li>
+	
+		<li>
+			<div class="lia-list-slim">
+				
+				<div class="lia-message-content">
+					<div class="MessageSubject">
+
+	
+
+	
+			<div class="MessageSubjectIcons ">
+	<span class="lia-img-icon-tkb-thread lia-fa-icon lia-fa-tkb lia-fa-thread lia-fa lia-icon-discussion-style" title="Knowledge Base Article" alt="This is an article" aria-label="Knowledge Base Article" role="img" id="imagedisplay_af81ed53b9706e_1_70bf1"></span>
+	
+	 
+	
+	
+	
+				
+		<h2 itemprop="name" class="message-subject">
+			<span class="lia-message-unread">
+				
+						<a class="page-link lia-link-navigation lia-custom-event" id="link_2_af81ed53b9706e_1_70bf1" href="https://community.box.com/t5/Account-Info-Troubleshooting/Changing-an-Email-Address-for-a-Single-Sign-On-Account/ta-p/53939">
+							Changing an Email Address for a Single Sign-On Acc...
+							
+						</a>
+					
+			</span>
+		</h2>
+	
+			
+	
+	<span class="lia-img-message-has-url lia-fa-message lia-fa-has lia-fa-url lia-fa" title="Contains a hyperlink" alt="Message contains a hyperlink" aria-label="Contains a hyperlink" role="img" id="display_2_af81ed53b9706e_1_70bf1"></span>
+	
+	
+	
+</div>
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+			
+					
+				
+		
+
+	
+</div>
+					
+					
+				</div>
+			</div>
+		</li>
+	
+		<li>
+			<div class="lia-list-slim">
+				
+				<div class="lia-message-content">
+					<div class="MessageSubject">
+
+	
+
+	
+			<div class="MessageSubjectIcons ">
+	<span class="lia-img-icon-tkb-thread lia-fa-icon lia-fa-tkb lia-fa-thread lia-fa lia-icon-discussion-style" title="Knowledge Base Article" alt="This is an article" aria-label="Knowledge Base Article" role="img" id="imagedisplay_af81ed53b9706e_2_70bf1"></span>
+	
+	 
+	
+	
+	
+				
+		<h2 itemprop="name" class="message-subject">
+			<span class="lia-message-unread">
+				
+						<a class="page-link lia-link-navigation lia-custom-event" id="link_2_af81ed53b9706e_2_70bf1" href="https://community.box.com/t5/How-to-Guides-for-Account/Enrolling-in-2FA-for-External-Collaboration/ta-p/69157">
+							Enrolling in 2FA for External Collaboration
+							
+						</a>
+					
+			</span>
+		</h2>
+	
+			
+	
+	
+	<span class="lia-img-message-has-image lia-fa-message lia-fa-has lia-fa-image lia-fa" title="Contains an image" alt="Message contains an image" aria-label="Contains an image" role="img" id="display_3_af81ed53b9706e_0_70bf1"></span>
+	
+	
+</div>
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+			
+					
+				
+		
+
+	
+</div>
+					
+					
+				</div>
+			</div>
+		</li>
+	
+		<li>
+			<div class="lia-list-slim">
+				
+				<div class="lia-message-content">
+					<div class="MessageSubject">
+
+	
+
+	
+			<div class="MessageSubjectIcons ">
+	<span class="lia-img-icon-tkb-thread lia-fa-icon lia-fa-tkb lia-fa-thread lia-fa lia-icon-discussion-style" title="Knowledge Base Article" alt="This is an article" aria-label="Knowledge Base Article" role="img" id="imagedisplay_af81ed53b9706e_3_70bf1"></span>
+	
+	 
+	
+	
+	
+				
+		<h2 itemprop="name" class="message-subject">
+			<span class="lia-message-unread">
+				
+						<a class="page-link lia-link-navigation lia-custom-event" id="link_2_af81ed53b9706e_3_70bf1" href="https://community.box.com/t5/How-to-Guides-for-Account/Logging-in-to-Box/ta-p/677">
+							Logging in to Box
+							
+						</a>
+					
+			</span>
+		</h2>
+	
+			
+	
+	<span class="lia-img-message-has-url lia-fa-message lia-fa-has lia-fa-url lia-fa" title="Contains a hyperlink" alt="Message contains a hyperlink" aria-label="Contains a hyperlink" role="img" id="display_2_af81ed53b9706e_2_70bf1"></span>
+	<span class="lia-img-message-has-image lia-fa-message lia-fa-has lia-fa-image lia-fa" title="Contains an image" alt="Message contains an image" aria-label="Contains an image" role="img" id="display_3_af81ed53b9706e_1_70bf1"></span>
+	
+	
+</div>
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+			
+					
+				
+		
+
+	
+</div>
+					
+					
+				</div>
+			</div>
+		</li>
+	
+
+</ul>
+	
+	
+	
+	
+
+</div></div></div></div><div class="lia-decoration-border-bottom"><div> </div></div></div></div>
+		
+			<div class="lia-panel lia-panel-standard UsersOnlineAvatarsTaplet Chrome lia-component-users-widget-users-avatars-online"><div class="lia-decoration-border"><div class="lia-decoration-border-top"><div> </div></div><div class="lia-decoration-border-content"><div><div class="lia-panel-heading-bar-wrapper"><div class="lia-panel-heading-bar"><span aria-level="4" role="heading" class="lia-panel-heading-bar-title">Users online (461)</span></div></div><div class="lia-panel-content-wrapper"><div class="lia-panel-content"><div id="usersOnlineAvatarsTaplet" class="UsersOnlineAvatarsTaplet lia-users-online-avatars">
+	<ul role="list" id="list_2" class="lia-list-tile">
+	
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_33" href="https://community.box.com/t5/user/viewprofilepage/user-id/7116"><img class="lia-user-avatar-message" title="TheBrycesWrite" alt="TheBrycesWrite" id="display_10" src="./Configuring A Firewall For Box Applications - Box_files/BDW Profile Picture.jpg">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_34" href="https://community.box.com/t5/user/viewprofilepage/user-id/1784894"><img class="lia-user-avatar-message" title="Hiromi" alt="Hiromi" id="display_11" src="./Configuring A Firewall For Box Applications - Box_files/FB_IMG_1523335025971.jpg">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_35" href="https://community.box.com/t5/user/viewprofilepage/user-id/1789657"><img class="lia-user-avatar-message" title="市川公巨" alt="市川公巨" id="display_12" src="./Configuring A Firewall For Box Applications - Box_files/small.png">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_36" href="https://community.box.com/t5/user/viewprofilepage/user-id/2042735"><img class="lia-user-avatar-message" title="Mike_123" alt="Mike_123" id="display_13" src="./Configuring A Firewall For Box Applications - Box_files/2(6)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_37" href="https://community.box.com/t5/user/viewprofilepage/user-id/1580439"><img class="lia-user-avatar-message" title="melven" alt="melven" id="display_14" src="./Configuring A Firewall For Box Applications - Box_files/2(7)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_38" href="https://community.box.com/t5/user/viewprofilepage/user-id/1703131"><img class="lia-user-avatar-message" title="itachibana" alt="itachibana" id="display_15" src="./Configuring A Firewall For Box Applications - Box_files/2(8)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_39" href="https://community.box.com/t5/user/viewprofilepage/user-id/2063564"><img class="lia-user-avatar-message" title="sebaudin" alt="sebaudin" id="display_16" src="./Configuring A Firewall For Box Applications - Box_files/2(9)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_40" href="https://community.box.com/t5/user/viewprofilepage/user-id/1925108"><img class="lia-user-avatar-message" title="ｔｔ" alt="ｔｔ" id="display_17" src="./Configuring A Firewall For Box Applications - Box_files/2(10)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_41" href="https://community.box.com/t5/user/viewprofilepage/user-id/1383607"><img class="lia-user-avatar-message" title="mredwintay" alt="mredwintay" id="display_18" src="./Configuring A Firewall For Box Applications - Box_files/2(11)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_42" href="https://community.box.com/t5/user/viewprofilepage/user-id/2069135"><img class="lia-user-avatar-message" title="Kajiyama" alt="Kajiyama" id="display_19" src="./Configuring A Firewall For Box Applications - Box_files/2(12)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_43" href="https://community.box.com/t5/user/viewprofilepage/user-id/2069209"><img class="lia-user-avatar-message" title="a1227811" alt="a1227811" id="display_20" src="./Configuring A Firewall For Box Applications - Box_files/2(13)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+			<li>
+				<div class="UserAvatar lia-user-avatar">
+	
+			
+				<a class="UserAvatar lia-link-navigation" target="_self" id="link_44" href="https://community.box.com/t5/user/viewprofilepage/user-id/2036298"><img class="lia-user-avatar-message" title="XiaoyueShi" alt="XiaoyueShi" id="display_21" src="./Configuring A Firewall For Box Applications - Box_files/2(14)">
+					
+				</a>
+				
+			
+		
+</div>
+			</li>
+		
+	
+</ul>
+</div></div></div></div></div><div class="lia-decoration-border-bottom"><div> </div></div></div></div>
+		
+	
+	
+</div>
+		</div>
+	</div><div class="lia-quilt-row lia-quilt-row-footer">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-common-footer">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-single">
+	
+		
+			<div class="lia-quilt lia-quilt-footer lia-quilt-layout-footer lia-component-quilt-footer">
+	<div class="lia-quilt-row lia-quilt-row-main">
+		<div class="lia-quilt-column lia-quilt-column-24 lia-quilt-column-single lia-quilt-column-icons">
+			<div class="lia-quilt-column-alley lia-quilt-column-alley-single">
+	
+		
+			<li:common-scroll-to class="lia-component-common-widget-scroll-to" li-bindable="" li-instance="0" componentid="common.widget.scroll-to" mode="default" li-compiled="true"><div class="li-common-scroll-to-wrapper" li-common-text-ready="&#39;common&#39;">
+  <a href="https://community.box.com/t5/How-to-Guides-for-Account/Configuring-A-Firewall-For-Box-Applications/ta-p/12" ng-click="scrollToPosition()" ng-bind="textKey | translate" class="li-common-scroll-to-link">Top</a>
+</div>
+</li:common-scroll-to>
+		
+			
+		
+			<!-- GZ-custom-footer  -->
+<div class="fooer-inner">
+  <div class="footer-row-1">
+    <div class="lia-quilt-column-12 footer-left">
+        <div class="language-dropdown-button pointerdiv">
+        <div class="language-dropdown-main">
+          <div class="languages-list">
+      		  <ul class="languages-list-flag">
+        			<li style="display:block;"><img src="./Configuring A Firewall For Box Applications - Box_files/USflag.svg"></li>
+        			<li style="display:none;"><img src="./Configuring A Firewall For Box Applications - Box_files/franceFlag.svg"></li>
+        			<li style="display:none;"><img src="./Configuring A Firewall For Box Applications - Box_files/JapanFlag.svg"></li>
+      		  </ul>
+            <select onchange="changeLocale(this.value)">
+              <option selected="" value="/t5/English/ct-p/English">English</option>
+              <option value="/t5/Contactez-Support/ct-p/BoxSupportFR">Français</option>
+              <option value="/t5/コミュニティ/ct-p/jp">日本語</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lia-quilt-column-12 footer-right">
+      <span class="follow-box follow-us">Follow Us</span>
+      <ul class="follow-box link">
+        <li><a href="https://www.facebook.com/box" title="Facebook"><i class="lia-fa lia-fa-facebook-official" aria-hidden="true"></i></a></li>
+        <li><a href="https://twitter.com/Box" title="Twitter"><i class="lia-fa lia-fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a href="https://www.linkedin.com/company/54178" title="Linkedin"><i class="lia-fa lia-fa-linkedin" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-row-2">
+    <div class="footer-nav-ul-wrapper">
+      <ul class="footer-nav-ul footer-nav-ul-section footer-nav-ul-left">
+        <li class=""><span>© 2019 Box</span></li>
+      </ul>
+      <ul class="footer-nav-ul footer-nav-ul-section footer-nav-ul-right">
+<li><a href="https://www.box.com/legal/termsofservice" target="_blank" title="Terms of Use">Terms of Use</a></li>
+			<li><a href="https://www.box.com/legal/privacypolicy" target="_blank" title="Privacy Policy">Privacy Policy</a></li>
+			<li><a href="https://cloud.box.com/s/cotkk9k3op6zw07rmr6jb3mhgv2dix4a" target="_blank" title="Fair Use Policy">Fair Use Policy</a></li>
+			<li><a href="https://community.box.com/t5/Tips-on-Using-the-Community/Community-Member-Guidelines/ta-p/17221" title="Community Guidelines">Community Guidelines</a></li>
+			<li><a href="https://cloud.box.com/s/lig0g41e2urgupdx3hgtp63jrkrfga8j" target="_blank" title="User Guide">User Guide</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+function changeLocale(val){
+  window.location.href = val;
+}
+</script>
+
+		
+	
+	
+</div>
+		</div>
+	</div>
+</div>
+		
+	
+	
+</div>
+		</div>
+	</div>
+</div>
+	
+
+	
+						<div style="display: none;"><div></div></div></div>
+					
+			</div>								
+		</div>
+	</div>
+
+				<link href="./Configuring A Firewall For Box Applications - Box_files/font-awesome.css" rel="stylesheet">
+
+				<style>
+					.popup-box-container{
+						animation-delay: 10s;
+					}
+				</style>
+			<style>
+				#lia-body .lia-quilt-row.lia-quilt-row-footer .li-common-scroll-to-wrapper {
+					float: left;
+					left: 0;
+				}
+				/* body {font-family: 'Lato','Helvetica Neue', Helvetica, Arial, sans-serif;} */
+				#lia-body .li-common-scroll-to-wrapper .li-common-scroll-to-link{
+					display: inline-block;
+				}
+				.survey_link {
+					margin-top: 16px;
+					background-color:#00B4B1;
+					color: #ffffff;
+					font-weight: bold;
+					border-radius: 4px;
+					display: inline-block;
+					letter-spacing: 1px;
+					cursor: pointer;
+				}
+				#lia-body .survey_link a{
+					color: #fff;
+					width: 100%;
+					padding: 10px 30px;
+					display: block;
+				}
+				#lia-body .survey_link:hover{
+					transition: background-color 200ms linear;
+					background-color: rgba(0, 180, 177,0.7);
+				}
+				#lia-body .popup-card.popup_2 a {
+					color: #00b4b1;
+				}
+				#lia-body .survey_link a:hover{
+					text-decoration: none;
+				}
+				/* The Modal (background) */
+
+				@-webkit-keyframes fadeIn {
+					from {opacity: 0} 
+					to {opacity: 1}
+				}
+				#lia-body.lia-body .popup-content h2 {
+					font-size: 18px;
+					line-height: 28px;
+					/* font-family: Arial; */
+					font-weight: 300;
+					margin: 0;
+				} 
+				@keyframes fadeIn {
+					from {opacity: 0} 
+					to {opacity: 1}
+				}
+				
+				/* Modal Content */
+				.popup-content {
+					position: fixed;
+					height:510px;
+					right: 45px;
+					background-color: #fefefe;
+					margin: auto;
+					padding: 0;
+					box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+					width:376px;
+					transition: bottom 0.5s,opacity 0.5s,0.5s visibility ease-in-out 0s;
+					opacity:0;
+					visibility: hidden;
+					bottom:0px;
+					z-index: 0;
+				}
+				.popup-content.not-hidden{
+					z-index: 999999;
+					opacity:1;
+					bottom: 115px;
+					border-radius: 10px;
+					visibility:visible;
+					border-radius: 8px;
+					overflow: hidden;
+					opacity: 1;
+					transition: bottom 0.5s,opacity 0.5s,0.5s visibility ease-in-out 0s;
+				}
+				.close {
+					float: right;
+					font-size: 20px;
+					font-weight: bold;
+					padding: 3px 0px;
+					color: #ffffff;
+					position: absolute;
+					height: 20px;
+					width: 20px;
+					top: 0px;
+					right: 32px;
+					position: absolute;
+					z-index: 9999;
+				}
+				.close:hover,.close:focus {
+					text-decoration: none;
+					cursor: pointer;
+				}
+				.popup-header {
+					position: relative;
+					height: 150px;
+					min-height: 75px;
+					background: linear-gradient(135deg, rgb(113, 219, 217) 0%, rgb(0, 180, 177) 100%);
+					background-blend-mode: overlay;
+					color: white;
+					border-radius: 8px 8px 0 0;
+					/* height: 207px; */
+					-webkit-transition: height 160ms ease-out;
+					transition: height 160ms ease-out;
+					overflow: hidden;
+				}
+				.popup-body {
+					padding: 15px 16px;
+					text-align:left;
+				}
+				#lia-body.lia-body .popup-body h2 {
+					margin-bottom: 15px;
+				}
+				.chat{
+					z-index:1;
+					opacity:0;
+					color:#ffffff;
+					position: absolute;
+					transition:opacity 0.5s;
+					top: 19px;
+					bottom: 0;
+					width: 100%;
+					right: 0;
+					left: 18px;
+				}
+				.chat.lazyload{
+					display:inline-block;
+					opacity:1;
+					z-index:2;
+				}
+				.chat.lazyload:before {
+					display: none;
+				}
+				.chat:hover{
+					cursor:pointer;
+				}
+				.close-btton{
+					display:none;
+				}
+				.close-button{
+					opacity:0;
+					z-index:1;
+					color:#ffffff;
+					left: 19px;
+					top: 3px;
+					font-size: 33px;
+					font-family:Arial;
+					position: absolute;
+					transition:opacity 0.5s;  
+				}
+				.close-button:hover{
+					cursor:pointer;
+				}
+				
+				.close-button.lazyload{
+					z-index:2;
+					opacity:1;
+				}
+				@-webkit-keyframes pulse {
+					0% {
+						-webkit-transform: scale3d(1, 1, 1);
+						transform: scale3d(1, 1, 1);
+					}
+					50% {
+						-webkit-transform: scale3d(1, 1, 1);
+						transform: scale3d(1, 1, 1);
+					}
+					100% {
+						-webkit-transform: scale3d(1, 1, 1);
+						transform: scale3d(1, 1, 1);
+					}
+				}		
+				@keyframes pulse {
+					0% {
+						-webkit-transform: scale3d(1, 1, 1);
+						transform: scale3d(1, 1, 1);
+					}
+					50% {
+						-webkit-transform: scale3d(1, 1, 1);
+						transform: scale3d(1, 1, 1);
+					}
+					100% {
+						-webkit-transform: scale3d(1, 1, 1);
+						transform: scale3d(1, 1, 1);
+					}
+				}
+				@-webkit-keyframes icon-anim {
+					0% {font-size: 40px;}
+					50% {font-size: 30px;}
+					100% {font-size: 40px;}
+				}
+				@keyframes icon-anim {
+					0% {font-size: 40px;}
+					50% {font-size: 30px;}
+					100% {font-size: 40px;}
+				}
+				.chat-header{
+					text-align:right;
+					position: fixed;
+					bottom: 5px;
+					right: 0px;
+				}
+				button#myBtn{
+					position: fixed;
+					bottom: 5px;
+					right: 0px;
+					border-radius: 50%;
+					padding: 6px;
+					margin: 5px 5px 0px 0px;
+					background:#ffffff;
+					cursor:pointer;
+					-webkit-animation-name: back-anim;
+					-webkit-animation-duration: 1s;
+					animation-name: back-anim;
+					animation-duration: 3s;
+					animation-delay: 15s;/* To change the start time */
+					animation-iteration-count: 40;
+					border:none;
+					z-index:2;
+				}
+				button#myBtn:hover{
+					cursor:pointer;
+				}
+				@-webkit-keyframes back-anim {
+					0% {background: #ffffff;}
+					50% {background: #CE4837;}
+					100% {background: #ffffff;}
+				}
+				@keyframes back-anim {
+					0% {background: #ffffff;}
+					50% {background: #CE4837;}
+					100% {background: #ffffff;}
+				}
+				button#myBtn:focus {
+					outline: 0;
+				}
+				#myBtn.scalar{
+					animation:scale 4s;
+					transform:scale(1,1);
+				}
+				@keyframes scale{
+					1%{
+						transform:scale(0,0) translate(-50%,-50%);
+						left: 50%;
+						top: 50%;
+						position: absolute;
+					}
+					100%{
+						transform:scale(1,1) translate(-50%,-50%);
+						left: 50%;
+						top: 50%;
+						position: absolute;
+					}
+				}
+				.inl{
+					display: inline-block;
+					vertical-align: middle;
+					font-size: 15px;
+					line-height: 25px;
+					font-weight: normal;
+				}
+				#lia-body .lia-content input.inl {
+					-webkit-appearance: checkbox;
+				}
+				@-moz-keyframes spin {
+					from { -moz-transform: rotate(0deg); }
+					to { -moz-transform: rotate(360deg); }
+				}
+				@-webkit-keyframes spin {
+					from { -webkit-transform: rotate(0deg); }
+					to { -webkit-transform: rotate(360deg); }
+				}
+				@keyframes spin {
+					from {transform:rotate(0deg);}
+					to {transform:rotate(360deg);}
+				}
+				.lr-icon{
+					font-size: 40px;
+					font-family:'FontAwesome';
+				}
+				/* Fading animation */
+				.fade {
+					-webkit-animation-name: fadeIn;
+					-webkit-animation-duration: 1.5s;
+					animation-name: fadeIn;
+					animation-duration: 1.5s;
+				}
+				
+				@-webkit-keyframes fade {
+					from {opacity: 0;transform:scale(0.5);} 
+					to {opacity: 1;transform:scale(1);}
+				}
+				
+				@keyframes fade {
+					from {opacity: 0;transform:scale(0.5);} 
+					to {opacity: 1;transform:scale(1);}
+				}
+				
+				.next .lr-icon {
+					padding-left: 5px;
+				}
+				.prev .lr-icon {
+					padding-right: 5px;
+				}
+				.lia-body .lia-content .prev.disabled a{
+					color:#D3D3D3;
+					cursor:not-allowed;
+					pointer-events: none;
+				}
+				.popup-box-container{
+					background-color: #71DBD9;
+					display: none;
+					cursor: pointer;
+					position: fixed;
+					bottom: 21px;
+					right: 20px;
+					border-radius: 50%;
+					z-index:2;
+					width: 60px;
+					height: 60px;
+					z-index: 9;
+					animation-name: blip;
+					animation-duration: 1.6s;
+					animation-iteration-count: 120;
+					animation-timing-function: ease-out;
+				}
+				@keyframes blip {
+					0% {
+						box-shadow: 0 0 0 0px rgba(113, 219, 217, 0.3), 0 0 0 0px rgba(113, 219, 217, 0.2);
+						transform: scale(1);
+					}
+					18% {
+						box-shadow: 0 0 0 0px rgba(113, 219, 217, 0.3), 0 0 0 0px rgba(113, 219, 217, 0.2);
+					}
+					35% {
+						transform: scale(1.08);
+					}
+					76% {
+						transform: scale(0.96);
+					}
+					100% {
+						box-shadow: 0 0 0 16px rgba(113, 219, 217, 0), 0 0 0 27px rgba(113, 219, 217, 0);
+						transform: scale(1);
+					}
+				}
+				#lia-body .lia-content .was-it-helpful h2{
+					padding: 15px;
+				}
+				.close-down:before{
+					font-family:'FontAwesome';
+				}
+				.popup-header-content{
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					padding: 40px 22px;
+					text-transform: capitalize;
+					padding-bottom: 87px;
+					-webkit-box-sizing: border-box;
+					box-sizing: border-box;
+				}
+				.popup-body{
+					position: relative;
+					background-color: white;
+					-webkit-box-shadow: inset 0 21px 4px -20px rgba(0, 0, 0, 0.2);
+					box-shadow: inset 0 21px 4px -20px rgba(0, 0, 0, 0.2);
+				}
+				.popup-body-container {
+					padding-top: 100px;
+				}
+				.popup-cards-container{
+					z-index: 999;
+					position: fixed;
+					height: 493px;
+					width: 370px;
+					bottom: 120px;
+					right: 45px;
+					overflow-y: auto;
+				}
+				.popup-card{
+					-webkit-transition-property: height;
+					transition-property: height;
+					-webkit-transition-duration: 300ms;
+					transition-duration: 300ms;
+					-webkit-transition-timing-function: ease-in-out;
+					transition-timing-function: ease-in-out;
+					-webkit-transition-delay: 300ms;
+					transition-delay: 300ms;
+					margin-bottom: 17px;
+					background-color: #fff;
+					border-radius: 3px;
+					font-size: 14px;
+					line-height: 1.4;
+					color: #000;
+					overflow: hidden;
+					position: relative;
+					-webkit-box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1), inset 0 2px 0 0 rgba(113, 219, 217, 0.5);
+					box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1), inset 0 2px 0 0 rgba(113, 219, 217, 0.5);
+					display:none;
+				}
+				.internal-card-content{
+					padding: 26px 24px 24px;
+					line-height: 1.5;
+				}
+				.popup-card-content{
+					padding-top:143px;
+					box-sizing: border-box;
+					padding: 0 16px;
+					min-height: 100%;
+				}
+				.chat svg{
+					width: 24px;
+				}
+				@media (min-width: 736px) and (max-width: 823px){
+					.popup-box-container{
+						bottom: 15px;
+					}
+					.popup-content.not-hidden{
+						bottom: 90px;
+					}
+					.popup-content{
+						height: 67%;
+						right: 32px;
+						width: 430px;
+					}
+					.popup-cards-container{
+						height: 61%;
+						width: 430px;
+						right: 32px;
+					}
+					.popup-header-content{
+						padding: 40px 17px;
+					}
+				}
+				@media screen and (max-width:731px){
+					.close{
+						right: 23px;
+					}
+					.popup-content{
+						right: 10px;
+						bottom: 68px;
+						height: 70%;
+						width: 300px;
+					}
+					.popup-cards-container{
+						height: 66%;
+						width: 294px;
+						bottom: 110px;
+						right: 10px;
+					}
+					.internal-card-content {
+						padding: 12px 20px;
+					}
+					.popup-content.not-hidden{
+						bottom: 91px;
+						right: 10px;
+					}
+					.close-button {
+						top: 4px;
+					}
+					.chat {
+						left: 19%;
+						top: 15px;
+					}
+					.chat svg{
+						width: 21px;
+						margin-top: 6px;
+						margin-left: 9px;
+					}
+					.popup-box-container{
+						bottom: 10px;
+					right: 10px;
+					}
+				}
+			</style>
+
+			<div class="popup-box-container add_popup" style="display: block;">
+				<i class="lia-fa lia-fa-comment-alt chat lazyload">
+					<svg aria-hidden="true" data-prefix="fas" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ffffff" d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 9.8 11.2 15.5 19.1 9.7L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64z"></path></svg>
+				</i>
+				<i class="close-button">×
+				</i>
+			</div>
+			<div class="popup-content">
+				<div class="popup_header_container">
+					<div class="popup-header">
+						<div class="popup-header-content">
+							<span class="close"><svg viewBox="0 0 15.1 8.9" fill="#ffffff" aria-label="a small down arrow to minimize chat box" role="img" data-reactid=".0.5.0.1.0"><title data-reactid=".0.5.0.1.0.0">Arrow Down</title><desc data-reactid=".0.5.0.1.0.1">a small down arrow to minimize chat box</desc><polygon class="olark-top-bar-arrow" points="0.2,1.4 7.6,8.9 15.1,1.4 13.7,0 7.6,6 1.6,0" data-reactid=".0.5.0.1.0.2"></polygon></svg></span>
+								<h2>Hi!</h2>
+						</div>
+					</div>
+				</div>
+				<div class="popup-body">
+					<div class="popup-cards-container">
+						<div class="popup-card-content">
+							<div class="popup-body-container">
+									
+<div class="popup-card popup_1">
+	<div class="internal-card-content">
+		<h2>Tell us what you think</h2>
+		<div><p>After your visit, can you take a brief survey and tell us how we did?</p><p>Approximate time to complete: 1-2 minutes</p></div>
+		<div class="survey_link"><a href="https://box.surveymonkey.com/r/KJMZCRR" target="_blank" class="survey_url">Start Survey</a></div>
+	</div>
+</div>
+<div class="popup-card popup_2">
+	<div class="internal-card-content">
+		<h2>Looking for help?</h2>
+		<p>Go to our <a href="https://community.box.com/t5/Contact-Support/ct-p/BoxSupport" target="_blank">Box Support</a> page to see your available options.</p>
+	</div>
+</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+
+			
+		</center>
+	</div>
+	
+	
+	
+	
+	<script type="text/javascript">_satellite.pageBottom();</script>
+
+	
+	
+	
+<script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/lia-scripts-angularjs-min.js.ダウンロード"></script><script language="javascript" type="text/javascript">
+<!--
+
+LITHIUM.AngularSupport.setOptions({"useCsp":true,"useNg2":false,"coreModuleDeps":["li.directives.common.slide-menu","li.directives.messages.message-image","li.directives.common.scroll-to","li.directives.common.non-bindable"],"debugEnabled":false});LITHIUM.AngularSupport.initGlobal(angular);// -->
+</script><script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/lia-scripts-angularjsModules-min.js.ダウンロード"></script><script language="javascript" type="text/javascript">
+<!--
+
+LITHIUM.AngularSupport.init();LITHIUM.Globals.restoreGlobals(['define','$','jQuery','angular']);// -->
+</script><script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/lia-scripts-common-min.js.ダウンロード"></script><script type="text/javascript" src="./Configuring A Firewall For Box Applications - Box_files/lia-scripts-body-min.js.ダウンロード"></script><script language="javascript" type="text/javascript">
+<!--
+
+LITHIUM.Sandbox.restore();LITHIUM.jQuery.fn.cssData.defaults={"dataPrefix":"lia-js-data","pairDelimeter":"-","prefixDelimeter":"-"};LITHIUM.CommunityJsonObject.User.policies['forums.action.message-view.batch-messages.allow']=false;(function($){$(window).unbind('scroll');$(window).off('scroll');$(document).unbind('scroll');$(document).off('scroll');$(document).ready(function(){$(window).unbind('scroll');$(window).off('scroll');$(document).unbind('scroll');$(document).off('scroll');var hash=window.location.hash;if(hash){var hash=hash.substring(1);}
+var isHTML=RegExp.prototype.test.bind(/(<([^>]+)>)/i);if(!isHTML(hash)){setTimeout(function(){scrollPage(hash);},1000);}
+function scrollPage(hash){if(hash){var abc='a[name="'+hash+'"]';if($(abc).length){var top_offset=$(abc).offset();$('html,body').animate({scrollTop:top_offset.top-60},200);}else{var top_offset=$("#"+hash).offset();$('html,body').animate({scrollTop:top_offset.top-60},200);}}}
+$('.lia-message-body-content a').click(function(){var aattr=$(this).attr('href').split("#")[1];scrollPage(aattr);});});})(LITHIUM.jQuery);(function($){$(document).on('ready',function(){function setCookie(cname,cvalue){document.cookie=cname+"="+cvalue+";path=/";}
+function getCookie(cname){var name=cname+"=";var decodedCookie=decodeURIComponent(document.cookie);var ca=decodedCookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' '){c=c.substring(1);}
+if(c.indexOf(name)==0){return c.substring(name.length,c.length);}}
+return"";}
+$('.survey_url').click(function(){var visitor_id=getCookie("box_visitor_id");var survey=$(this).attr('href');survey=survey+"?box_visitor_id="+visitor_id;$(this).attr("href",survey);});var l=$('.announcement-wrapper').length;if($('.announcement-wrapper').css('display')=='none'||l<=0){$(".popup-box-container").show();}
+$(document).on("click",".popup-box-container.add_popup",function(){$(this).addClass('remove_popup');$(this).removeClass('add_popup');$(".popup-content").addClass("not-hidden");$(".close-button").addClass("lazyload");$('.popup-box-container , .chat').css("animation","none");$(".chat").removeClass("lazyload");$(".popup-cards-container").css("visibility","visible");setTimeout(function(){$(".popup_1").fadeIn();},300);setTimeout(function(){$(".popup_2").fadeIn();},500);});$(document).on("click",".popup-box-container.remove_popup,.close",function(){$('.popup-box-container').removeClass('remove_popup');$('.popup-box-container').addClass('add_popup');$(".popup-content").removeClass("not-hidden");$(".close-button").removeClass("lazyload");$(".chat").addClass("lazyload");$(".popup-cards-container").css("visibility","hidden");$(".popup-card").fadeOut();});$('.popup-cards-container').on('scroll',function(){var scroll=$('.popup-cards-container').scrollTop();if(scroll>50){$('.popup-header-content').fadeOut();}
+else{$('.popup-header-content').fadeIn();}});});})(LITHIUM.jQuery);(function($){$('.menu_Close').live("click",function(event){$('.lia-slide-menu-trigger').trigger('click');});$('#mySidenav, .openbtn').live("click",function(event){event.stopPropagation();});$(".nav-item > a.secondary-action,.nav-back").live("click",function(event){event.preventDefault();if($(this).attr('data-trigger')!='undefined'){var dataAttr=$(this).attr('data-trigger');if($(this).parent().hasClass('nav-item')){var attrData="[data-node='"+dataAttr+"']";var hideshowElem=$('.left_navigation_content').find(attrData);}else{var attrDataBack="[data-href='"+dataAttr+"']";var triggerElem=$(attrDataBack).parents("ul.lia-community-nav-node[data-node]");var dataNodeElem=triggerElem.attr('data-node');var attrData="[data-node='"+dataNodeElem+"']";var hideshowElem=$('.left_navigation_content').find(attrData);}
+if($(attrData).length>0){$("ul[data-node]").each(function(){if($(this).hasClass('show_slide')){$(this).addClass('hide_slide');$(this).removeClass('show_slide');}});$(hideshowElem).removeClass('hide_slide');$(hideshowElem).addClass('show_slide');}else{}}});})(LITHIUM.jQuery);LITHIUM.Form.resetFieldForFocusFound();LITHIUM.UserNavigation2({"selectors":{"userDropDownPanelSelectorRel":".user-navigation-settings-drop-down","userLinkSelectorRel":".user-navigation-settings-dropdown-link"},"events":{"userLinkEvent":"click"},"misc":{"toggleOnClick":false}});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox_af81ed0221e475","feedbackSelector":".InfoMessage"});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox_af81ed0221e475_0","feedbackSelector":".InfoMessage"});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox_af81ed0221e475_1","feedbackSelector":".InfoMessage"});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox_af81ed0221e475_2","feedbackSelector":".InfoMessage"});LITHIUM.AjaxFeedback(".lia-inline-ajax-feedback","LITHIUM:hideAjaxFeedback",".lia-inline-ajax-feedback-persist");LITHIUM.Placeholder();LITHIUM.AutoComplete({"options":{"triggerTextLength":0,"updateInputOnSelect":true,"loadingText":"Searching...","emptyText":"No Matches","successText":"Results:","defaultText":"Enter a search word","disabled":false,"footerContent":[{"scripts":"\n\nLITHIUM.AjaxSupport.defaultAjaxFeedbackHtml = \"<div class=\\\"lia-inline-ajax-feedback lia-component-common-widget-ajax-feedback\\\">\\n\\t\\t\\t<div class=\\\"AjaxFeedback\\\" id=\\\"ajaxFeedback_af81ed027476ee\\\"><\\/div>\\n\\t\\t\\t\\n\\t\\n\\n\\t\\n\\n\\t\\t<\\/div>\";LITHIUM.AjaxSupport.defaultAjaxErrorHtml = \"<span id=\\\"feedback-error\\\"> <\\/span>\\n\\n\\t\\n\\t\\t<div class=\\\"InfoMessage lia-panel-feedback-inline-alert lia-component-common-widget-feedback\\\" id=\\\"feedback_af81ed02874efc\\\">\\n\\t\\t\\t<div role=\\\"alert\\\" class=\\\"lia-text\\\">\\n\\t\\t\\t\\t\\n\\n\\t\\t\\t\\t\\n\\t\\t\\t\\t\\t<p ng-non-bindable=\\\"\\\" tabindex=\\\"0\\\">Sorry, unable to complete the action you requested.<\\/p>\\n\\t\\t\\t\\t\\n\\n\\t\\t\\t\\t\\n\\n\\t\\t\\t\\t\\n\\n\\t\\t\\t\\t\\n\\t\\t\\t<\\/div>\\n\\n\\t\\t\\t\\n\\t\\t<\\/div>\";LITHIUM.AjaxSupport.fromLink('#disableAutoComplete_af81ed0267701b', 'disableAutoComplete', '#ajaxfeedback_af81ed0221e475_0', 'LITHIUM:ajaxError', {}, '', 'ajax');","content":"<a class=\"lia-link-navigation lia-autocomplete-toggle-off lia-component-search-action-disable-auto-complete\" rel=\"nofollow\" id=\"disableAutoComplete_af81ed0267701b\" href=\"https://community.box.com/t5/tkb/v2_4/articlepage.disableautocomplete:disableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1\">Turn off suggestions<\/a>"}]},"inputSelector":"#messageSearchField_af81ed0221e475_0","redirectToItemLink":false,"url":"https://community.box.com/t5/tkb/v2_4/articlepage.searchformv32.messagesearchfield.messagesearchfield:autocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&t:cp=search/contributions/page","resizeImageEvent":"LITHIUM:renderImages"});LITHIUM.AutoComplete({"options":{"triggerTextLength":0,"updateInputOnSelect":true,"loadingText":"Searching...","emptyText":"No Matches","successText":"Results:","defaultText":"Enter a search word","disabled":false,"footerContent":[{"scripts":"\n\nLITHIUM.AjaxSupport.fromLink('#disableAutoComplete_af81ed02afbf80', 'disableAutoComplete', '#ajaxfeedback_af81ed0221e475_0', 'LITHIUM:ajaxError', {}, '', 'ajax');","content":"<a class=\"lia-link-navigation lia-autocomplete-toggle-off lia-component-search-action-disable-auto-complete\" rel=\"nofollow\" id=\"disableAutoComplete_af81ed02afbf80\" href=\"https://community.box.com/t5/tkb/v2_4/articlepage.disableautocomplete:disableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1\">Turn off suggestions<\/a>"}]},"inputSelector":"#messageSearchField_af81ed0221e475_1","redirectToItemLink":false,"url":"https://community.box.com/t5/tkb/v2_4/articlepage.searchformv32.tkbmessagesearchfield.messagesearchfield:autocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&t:cp=search/contributions/page","resizeImageEvent":"LITHIUM:renderImages"});LITHIUM.AutoComplete({"options":{"triggerTextLength":0,"updateInputOnSelect":true,"loadingText":"Searching for users...","emptyText":"No Matches","successText":"Users found:","defaultText":"Enter a user name or rank","disabled":false,"footerContent":[{"scripts":"\n\nLITHIUM.AjaxSupport.fromLink('#disableAutoComplete_af81ed02c7d7b6', 'disableAutoComplete', '#ajaxfeedback_af81ed0221e475_0', 'LITHIUM:ajaxError', {}, '', 'ajax');","content":"<a class=\"lia-link-navigation lia-autocomplete-toggle-off lia-component-search-action-disable-auto-complete\" rel=\"nofollow\" id=\"disableAutoComplete_af81ed02c7d7b6\" href=\"https://community.box.com/t5/tkb/v2_4/articlepage.disableautocomplete:disableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1\">Turn off suggestions<\/a>"}]},"inputSelector":"#userSearchField_af81ed0221e475","redirectToItemLink":false,"url":"https://community.box.com/t5/tkb/v2_4/articlepage.searchformv32.usersearchfield.usersearchfield:autocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&t:cp=search/contributions/page","resizeImageEvent":"LITHIUM:renderImages"});LITHIUM.AjaxSupport({"ajaxOptionsParam":{"event":"LITHIUM:userExistsQuery","parameters":{"javascript.ignore_combine_and_minify":"true"}},"tokenId":"ajax","elementSelector":"#userSearchField_af81ed0221e475","action":"userExistsQuery","feedbackSelector":"#ajaxfeedback_af81ed0221e475_0","url":"https://community.box.com/t5/tkb/v2_4/articlepage.searchformv32.usersearchfield:userexistsquery?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&t:cp=search/contributions/page","ajaxErrorEventName":"LITHIUM:ajaxError","token":""});LITHIUM.AutoComplete({"options":{"triggerTextLength":0,"updateInputOnSelect":true,"loadingText":"Searching...","emptyText":"No Matches","successText":"Results:","defaultText":"Enter a search word","disabled":false,"footerContent":[{"scripts":"\n\nLITHIUM.AjaxSupport.fromLink('#disableAutoComplete_af81ed02deb617', 'disableAutoComplete', '#ajaxfeedback_af81ed0221e475_0', 'LITHIUM:ajaxError', {}, '', 'ajax');","content":"<a class=\"lia-link-navigation lia-autocomplete-toggle-off lia-component-search-action-disable-auto-complete\" rel=\"nofollow\" id=\"disableAutoComplete_af81ed02deb617\" href=\"https://community.box.com/t5/tkb/v2_4/articlepage.disableautocomplete:disableautocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&amp;t:cp=action/contributions/searchactions&amp;ticket=WaIdWtJjiMsr_-1\">Turn off suggestions<\/a>"}]},"inputSelector":"#noteSearchField_af81ed0221e475_0","redirectToItemLink":false,"url":"https://community.box.com/t5/tkb/v2_4/articlepage.searchformv32.notesearchfield.notesearchfield:autocomplete?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&t:cp=search/contributions/page","resizeImageEvent":"LITHIUM:renderImages"});LITHIUM.AjaxSupport.fromLink('#enableAutoComplete_af81ed0221e475','enableAutoComplete','#ajaxfeedback_af81ed0221e475_0','LITHIUM:ajaxError',{},'','ajax');LITHIUM.Tooltip({"bodySelector":"body#lia-body","delay":30,"enableOnClickForTrigger":false,"predelay":10,"triggerSelector":"#link_af81ed0221e475","tooltipContentSelector":"#link_af81ed0221e475_0-tooltip-element .content","position":["bottom","left"],"tooltipElementSelector":"#link_af81ed0221e475_0-tooltip-element","events":{"def":"focus mouseover,blur mouseout"},"hideOnLeave":true});LITHIUM.SearchAutoCompleteToggle({"containerSelector":"#searchautocompletetoggle_af81ed0221e475","enableAutoCompleteSelector":".search-autocomplete-toggle-link","enableAutocompleteSuccessEvent":"LITHIUM:ajaxSuccess:enableAutoComplete","disableAutoCompleteSelector":".lia-autocomplete-toggle-off","disableAutocompleteSuccessEvent":"LITHIUM:ajaxSuccess:disableAutoComplete","autoCompleteSelector":".lia-autocomplete-input"});LITHIUM.SearchForm({"asSearchActionIdSelector":".lia-as-search-action-id","useAutoComplete":true,"selectSelector":".lia-search-form-granularity","useClearSearchButton":false,"buttonSelector":".lia-button-searchForm-action","asSearchActionIdParamName":"as-search-action-id","formSelector":"#lia-searchformV32_af81ed0221e475","nodesModel":{"English|category":{"title":"Search Community: How to Guides for Account Information","inputSelector":".lia-search-input-message"},"user|user":{"title":"Users","inputSelector":".lia-search-input-user"},"AccountBilling|category":{"title":"Search Category: How to Guides for Account Information","inputSelector":".lia-search-input-message"},"howtoguidesaccountinfo|tkb-board":{"title":"Search Knowledge Base: How to Guides for Account Information","inputSelector":".lia-search-input-message"}},"asSearchActionIdHeaderKey":"X-LI-AS-Search-Action-Id","inputSelector":"#messageSearchField_af81ed0221e475_0:not(.lia-js-hidden)","clearSearchButtonSelector":null});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#pageInformation","feedbackSelector":".InfoMessage"});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox","feedbackSelector":".InfoMessage"});LITHIUM.DropDownMenu({"menuOffsetContainer":".lia-menu-offset-container","hoverLeaveEvent":"LITHIUM:hoverLeave","mouseoverElementSelector":".lia-js-mouseover-menu","menuOpenCssClass":"dropdownHover","clickElementSelector":".lia-js-click-menu","menuElementSelector":".lia-menu-navigation-wrapper","menuItemsSelector":".lia-menu-dropdown-items","menuClosedEvent":"LITHIUM:menuClosed","closeMenuEvent":"LITHIUM:closeMenu","menuOpenedEvent":"LITHIUM:menuOpened"});LITHIUM.DropDownMenuVisibilityHandler({"selectors":{"menuSelector":"#actionMenuDropDown","menuItemsSelector":".lia-menu-dropdown-items"}});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox_0","feedbackSelector":".InfoMessage"});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox_1","feedbackSelector":".InfoMessage"});LITHIUM.CustomEvent('.lia-custom-event','click');LITHIUM.MessageBodyDisplay('#bodyDisplay','.lia-truncated-body-container','#viewMoreLink','.lia-full-body-container');LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox_2","feedbackSelector":".InfoMessage"});LITHIUM.InformationBox({"updateFeedbackEvent":"LITHIUM:updateAjaxFeedback","componentSelector":"#informationbox_3","feedbackSelector":".InfoMessage"});LITHIUM.AjaxSupport.fromLink('#kudoEntity','kudoEntity','#ajaxFeedback_0','LITHIUM:ajaxError',{},'','ajax');LITHIUM.AjaxSupport.ComponentEvents.set({"eventActions":[{"event":"kudoEntity","actions":[{"context":"envParam:entity","action":"rerender"}]}],"componentId":"kudos.widget.button","initiatorBinding":true,"selector":"#kudosButtonV2","parameters":{"displayStyle":"vertical","disallowZeroCount":"false","revokeMode":"true","kudosable":"true","showCountOnly":"false","useCountToKudo":"false","entity":"12","linkDisabled":"false"},"initiatorDataMatcher":"data-lia-kudos-id"});LITHIUM.Components.renderInPlace('recommendations.widget.recommended-content-taplet',{"componentParams":"{\n  \"mode\" : \"slim\",\n  \"componentId\" : \"recommendations.widget.recommended-content-taplet\"\n}","componentId":"recommendations.widget.recommended-content-taplet"},{"errorMessage":"An Unexpected Error has occurred.","type":"POST","url":"https://community.box.com/t5/tkb/v2_4/articlepage.recommendedcontenttaplet:lazyrender?t:ac=blog-id/howtoguidesaccountinfo/article-id/36&t:cp=recommendations/contributions/page"},'lazyload');LITHIUM.PartialRenderProxy({"limuirsComponentRenderedEvent":"LITHIUM:limuirsComponentRendered","relayEvent":"LITHIUM:partialRenderProxyRelay","listenerEvent":"LITHIUM:partialRenderProxy"});LITHIUM.AjaxSupport({"ajaxOptionsParam":{"event":"LITHIUM:partialRenderProxyRelay","parameters":{"javascript.ignore_combine_and_minify":"true"}},"tokenId":"ajax","elementSelector":document,"action":"partialRenderProxyRelay","feedbackSelector":false,"url":"https://community.box.com/t5/tkb/v2_4/articlepage.liabase.basebody.partialrenderproxy:partialrenderproxyrelay?t:ac=blog-id/howtoguidesaccountinfo/article-id/36","ajaxErrorEventName":"LITHIUM:ajaxError","token":""});new Image().src=["/","b","e","a","c","o","n","/","4","1","3","5","4","5","0","5","3","2","3","_","1","5","7","5","3","4","5","6","4","1","8","0","8",".","g","i","f"].join("");LITHIUM.Auth.API_URL='/t5/util/authcheckpage';LITHIUM.Auth.LOGIN_URL_TMPL='/plugins/common/feature/oauth2sso/sso_login_redirect?referer=https%3A%2F%2FREPLACE_TEXT';LITHIUM.Auth.KEEP_ALIVE_URL='/t5/status/blankpage?keepalive';LITHIUM.Auth.KEEP_ALIVE_TIME=180000;LITHIUM.Auth.CHECK_SESSION_TOKEN='WaIdWtJjiMsr_-1';LITHIUM.AjaxSupport.useTickets=true;LITHIUM.Cache.CustomEvent.set([{"elementId":"link_5","stopTriggerEvent":false,"fireEvent":"LITHIUM:selectMessage","triggerEvent":"click","eventContext":{"message":12}}]);LITHIUM.Loader.runJsAttached();// -->
+</script>
+<div role="alertdialog" class="lia-content lia-tooltip-pos-bottom-left lia-panel-tooltip-wrapper" id="link_af81ed0221e475_0-tooltip-element" style="display: none;"><div class="lia-tooltip-arrow"></div><div class="lia-panel-tooltip"><div class="content">Auto-suggest helps you quickly narrow down your search results by suggesting possible matches as you type.</div></div><div style="display: none;"><div></div></div></div></body></html>
